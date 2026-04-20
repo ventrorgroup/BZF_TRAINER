@@ -1,0 +1,34 @@
+<div class="glass-card q-card" *ngIf="question">
+  <div class="q-header">
+    <div class="q-badge-info">
+      <span class="q-badge">Frage {{question?.qNumber}}</span>
+      <span class="q-category-tag">{{question?.category}}</span>
+    </div>
+    <div class="q-actions">
+      <button class="btn-flag-minimal" [class.active]="isDifficult" (click)="toggleDifficult($event)" title="Frage merken">
+        <span class="flag-icon">{{isDifficult ? '⭐' : '☆'}}</span>
+        {{isDifficult ? 'Gemerkt' : 'Merken'}}
+      </button>
+    </div>
+  </div>
+
+  <div class="q-body">
+    <p class="q-text">{{question?.text}}</p>
+    
+    <div class="options-list">
+      <div *ngFor="let ans of shuffledAnswers" 
+           class="option" 
+           [class]="getOptionClass(ans)"
+           (click)="select(ans)">
+        <span class="option-indicator"></span>
+        <span class="option-text">{{ans.text}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-footer" *ngIf="showFeedback">
+    <div class="feedback-msg" [class.success]="selectedAnswer?.isCorrect" [class.error]="!selectedAnswer?.isCorrect">
+      {{selectedAnswer?.isCorrect ? 'Richtig!' : 'Leider falsch.'}}
+    </div>
+  </div>
+</div>

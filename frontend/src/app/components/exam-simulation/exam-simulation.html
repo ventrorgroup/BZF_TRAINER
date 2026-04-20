@@ -1,0 +1,53 @@
+<div class="exam-simulation">
+  
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Lade Daten...</p>
+  </div>
+
+  <div *ngIf="error" class="error-alert glass-card">
+    <p>{{error}}</p>
+    <button class="btn-secondary" (click)="loadExams()">Erneut versuchen</button>
+  </div>
+
+  <div *ngIf="!activeExam && !loading && !error" class="selection-screen">
+    <h2 class="gradient-text">Prüfungssimulation</h2>
+    <p>Wähle eine der 5 festgelegten Prüfungen aus. Jede Prüfung hat 60 Fragen.</p>
+    
+    <div class="exam-grid">
+      <div class="glass-card exam-card" *ngFor="let exam of exams">
+        <h3>{{exam.name}}</h3>
+        <p>{{exam._count?.results || 0}} Versuche abgeschlossen</p>
+        <button class="btn-primary" (click)='startExam(exam)'>Starten</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeExam && !examFinished" class="exam-active">
+    <div class="exam-header">
+      <h3>{{activeExam.name}}</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="(currentQuestionIndex / activeExam.examQuestions.length) * 100"></div>
+      </div>
+      <div class="q-count">Frage {{currentQuestionIndex + 1}} von {{activeExam.examQuestions.length}}</div>
+    </div>
+
+    <app-question-card 
+      [question]="activeExam.examQuestions[currentQuestionIndex].question"
+      [showFeedback]="false"
+      (answered)="onAnswered($event)">
+    </app-question-card>
+  </div>
+
+  <div *ngIf="examFinished" class="results-screen">
+    <div class="glass-card result-card">
+      <h2 class="gradient-text">Prüfung Beendet</h2>
+      <div class="big-score" [class.pass]="score >= 75" [class.fail]="score < 75">{{score}}%</div>
+      <p class="result-msg">
+        {{score >= 75 ? 'Herzlichen Glückwunsch! Du hättest bestanden.' : 'Das hat leider noch nicht gereicht. Übe fleißig weiter.'}}
+      </p>
+      <button class="btn-primary" (click)="reset()">Zurück zur Auswahl</button>
+    </div>
+  </div>
+
+</div>

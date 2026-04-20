@@ -1,0 +1,28 @@
+<div class="unsure-mode">
+  <div class="header">
+    <h2 class="gradient-text">Unsichere Fragen</h2>
+    <p>Hier siehst du Fragen, die du bisher oft falsch beantwortet hast oder noch gar nicht dran kamen.</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">Lädt...</div>
+
+  <div *ngIf="!loading && questions.length === 0" class="empty-state">
+    <div class="glass-card">
+      <h3>Super!</h3>
+      <p>Es gibt aktuell keine unsicheren Fragen mehr.</p>
+      <button class="btn-primary" routerLink="/dashboard">Zurück zum Dashboard</button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && questions.length > 0">
+    <app-question-card
+      [question]="questions[currentIndex]"
+      [showFeedback]="showFeedback"
+      (answered)="onAnswered($event)">
+    </app-question-card>
+
+    <div class="actions" *ngIf="showFeedback">
+      <button class="btn-primary" (click)="next()">Nächste Frage</button>
+    </div>
+  </div>
+</div>

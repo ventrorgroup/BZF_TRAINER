@@ -1,0 +1,22 @@
+<div class="learning-mode">
+  <div class="header">
+    <h2 class="gradient-text">Zufälliges Lernen</h2>
+    <p>Beantworte Fragen aus dem gesamten Katalog in zufälliger Reihenfolge.</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    Lädt nächste Frage...
+  </div>
+
+  <div *ngIf="!loading && currentQuestion">
+    <app-question-card 
+      [question]="currentQuestion" 
+      [showFeedback]="showFeedback"
+      (answered)="onAnswered($event)">
+    </app-question-card>
+
+    <div class="actions" *ngIf="showFeedback">
+      <button class="btn-primary" (click)="nextQuestion()">Nächste Frage</button>
+    </div>
+  </div>
+</div>

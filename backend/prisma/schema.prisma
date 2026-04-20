@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Question {
+  id              Int      @id @default(autoincrement())
+  qNumber         String   @unique
+  text            String
+  category        String   // BZF1, BZF2, Both
+  imageUrl        String?
+  answers         Answer[]
+  stats           UserStat?
+  examQuestions   ExamQuestion[]
+}
+
+model Answer {
+  id          Int      @id @default(autoincrement())
+  questionId  Int
+  text        String
+  isCorrect   Boolean
+  question    Question @relation(fields: [questionId], references: [id])
+}
+
+model UserStat {
+  id          Int      @id @default(autoincrement())
+  questionId  Int      @unique
+  correct     Int      @default(0)
+  incorrect   Int      @default(0)
+  isDifficult Boolean  @default(false)
+  question    Question @relation(fields: [questionId], references: [id])
+}
+
+model Exam {
+  id        Int      @id @default(autoincrement())
+  name      String
+  examQuestions ExamQuestion[]
+  results   ExamResult[]
+}
+
+model ExamQuestion {
+  id         Int      @id @default(autoincrement())
+  examId     Int
+  questionId Int
+  exam       Exam     @relation(fields: [examId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
+}
+
+model ExamResult {
+  id        Int      @id @default(autoincrement())
+  examId    Int
+  date      DateTime @default(now())
+  score     Int
+  exam      Exam     @relation(fields: [examId], references: [id])
+}

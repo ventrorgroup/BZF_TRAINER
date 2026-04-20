@@ -1,0 +1,70 @@
+<div class="dashboard">
+  <h1 class="gradient-text">Willkommen zum BZF Trainer</h1>
+  
+  <div class="stats-grid" *ngIf="stats">
+    <div class="glass-card stat-item">
+      <h3>Fragen Abdeckung</h3>
+      <div class="stat-value">{{stats.answeredQuestions}} / {{stats.totalQuestions}}</div>
+      <p>Fragen bereits beantwortet</p>
+    </div>
+
+    <div class="glass-card stat-item">
+      <h3>Gesamt Erfolgsquote</h3>
+      <div class="stat-value">{{getSuccessRate()}}%</div>
+      <p>Basis: {{stats.totalCorrect + stats.totalIncorrect}} Antworten</p>
+    </div>
+
+    <div class="glass-card stat-item">
+      <h3>Häufigkeit Correct</h3>
+      <div class="stat-value">{{stats.totalCorrect}}</div>
+      <p>Richtig beantwortete Fragen</p>
+    </div>
+
+    <div class="glass-card stat-item">
+      <h3>Gemerkt (Schwer)</h3>
+      <div class="stat-value">{{stats.difficultCount}}</div>
+      <p>Fragen in der Merkliste</p>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="glass-card chart-container">
+      <h3>Antwort-Verteilung</h3>
+      <div class="chart-wrapper">
+        <canvas baseChart
+          [data]="pieChartData"
+          [options]="pieChartOptions"
+          [type]="pieChartType">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-card recent-exams">
+      <h3>Letzte Prüfungen</h3>
+      <div *ngIf="stats?.recentExams?.length === 0" class="no-data">Noch keine Prüfungen absolviert.</div>
+      <div class="exam-list" *ngIf="stats?.recentExams?.length > 0">
+        <div class="exam-item" *ngFor="let exam of stats.recentExams">
+          <div class="exam-date">{{exam.date | date:'dd.MM.yyyy HH:mm'}}</div>
+          <div class="exam-score" [class.pass]="exam.score >= 75" [class.fail]="exam.score < 75">
+            {{exam.score}}%
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary" routerLink="/exams" style="margin-top: 1rem; width: 100%;">Neue Prüfung starten</button>
+    </div>
+  </div>
+
+  <div class="quick-access glass-card" style="margin-top: 2rem;">
+    <h3>Lern-Modi</h3>
+    <div class="mode-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+      <div class="mode-card glass-card" style="cursor: pointer;" routerLink="/learn">
+        <h4>Zufalls-Lernen</h4>
+        <p>Fragen in zufälliger Reihenfolge zum Vertiefen.</p>
+      </div>
+      <div class="mode-card glass-card" style="cursor: pointer;" routerLink="/learn/sequential/1">
+        <h4>Fragen-Katalog</h4>
+        <p>Alle 261 Fragen der Reihe nach durchgehen.</p>
+      </div>
+    </div>
+  </div>
+</div>
