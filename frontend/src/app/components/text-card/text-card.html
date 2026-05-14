@@ -1,0 +1,40 @@
+<div class="text-card glass-card">
+    <div class="card-header">
+        <span class="text-number">Text Nr. {{ text.number }}</span>
+        <div class="badges">
+            <span class="badge views" title="Wie oft aufgerufen">👁 {{ text.stats?.viewCount || 0 }}</span>
+            <span class="badge count easy">L: {{ text.stats?.easyCount || 0 }}</span>
+            <span class="badge count medium">M: {{ text.stats?.mediumCount || 0 }}</span>
+            <span class="badge count hard">S: {{ text.stats?.hardCount || 0 }}</span>
+            <span class="badge favorite" *ngIf="text.stats?.isFavorite">★</span>
+            <span class="badge difficulty" [class]="text.stats?.difficulty" *ngIf="text.stats?.difficulty && text.stats?.difficulty !== 'unknown'">
+                {{ text.stats?.difficulty }}
+            </span>
+        </div>
+    </div>
+
+    <div class="content-grid">
+        <div class="lang-section en">
+            <div class="label">English</div>
+            <div class="text">
+                <div *ngFor="let line of formatText(text.textEn)" [class.bullet]="line.isBullet">
+                    <span class="bullet-marker" *ngIf="line.isBullet">{{ line.marker }}</span>
+                    <span class="line-text">{{ line.content }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="lang-section de" [class.hidden]="!showTranslation">
+            <div class="label">Deutsch</div>
+            <div class="text" *ngIf="showTranslation">
+                <div *ngFor="let line of formatText(text.textDe)" [class.bullet]="line.isBullet">
+                    <span class="bullet-marker" *ngIf="line.isBullet">{{ line.marker }}</span>
+                    <span class="line-text">{{ line.content }}</span>
+                </div>
+            </div>
+            <div class="placeholder" *ngIf="!showTranslation">
+                <button class="reveal-btn" (click)="toggleTranslation()">Übersetzung anzeigen</button>
+            </div>
+        </div>
+    </div>
+</div>

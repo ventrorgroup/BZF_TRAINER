@@ -1,28 +1,57 @@
-<div class="unsure-mode">
-  <div class="header">
-    <h2 class="gradient-text">Unsichere Fragen</h2>
-    <p>Hier siehst du Fragen, die du bisher oft falsch beantwortet hast oder noch gar nicht dran kamen.</p>
-  </div>
-
-  <div *ngIf="loading" class="loading-state">Lädt...</div>
-
-  <div *ngIf="!loading && questions.length === 0" class="empty-state">
-    <div class="glass-card">
-      <h3>Super!</h3>
-      <p>Es gibt aktuell keine unsicheren Fragen mehr.</p>
-      <button class="btn-primary" routerLink="/dashboard">Zurück zum Dashboard</button>
+<div class="learning-container">
+    <div class="header">
+        <h1 class="gradient-text">Noch offen</h1>
+        <p>Fragen und Texte, die du noch nicht (richtig) beantwortet oder bewertet hast.</p>
     </div>
-  </div>
 
-  <div *ngIf="!loading && questions.length > 0">
-    <app-question-card
-      [question]="questions[currentIndex]"
-      [showFeedback]="showFeedback"
-      (answered)="onAnswered($event)">
-    </app-question-card>
-
-    <div class="actions" *ngIf="showFeedback">
-      <button class="btn-primary" (click)="next()">Nächste Frage</button>
+    <div class="tabs">
+        <button [class.active]="activeTab === 'questions'" (click)="setTab('questions')">
+            Fragen ({{ questions.length }})
+        </button>
+        <button [class.active]="activeTab === 'texts'" (click)="setTab('texts')">
+            Englisch-Texte ({{ texts.length }})
+        </button>
     </div>
-  </div>
+
+    <div class="content" *ngIf="activeTab === 'questions'">
+        <div *ngIf="!loading && questions.length > 0; else emptyQuestions">
+            <app-question-card 
+                [question]="questions[currentIndex]" 
+                [showFeedback]="showFeedback"
+                (answered)="onAnswered($event)">
+            </app-question-card>
+
+            <div class="actions" *ngIf="showFeedback">
+                <button class="btn-primary" (click)="next()">Nächste Frage</button>
+            </div>
+            
+            <div class="progress">
+                Frage {{currentIndex + 1}} von {{questions.length}}
+            </div>
+        </div>
+    </div>
+
+    <div class="content" *ngIf="activeTab === 'texts'">
+        <div *ngIf="texts.length > 0; else emptyTexts" class="text-list">
+            <app-text-card *ngFor="let t of texts" [text]="t"></app-text-card>
+        </div>
+    </div>
+
+    <ng-template #emptyQuestions>
+        <div class="glass-card empty-state" *ngIf="!loading">
+            <div class="empty-icon">✅</div>
+            <h3>Alles erledigt!</h3>
+            <p>Du hast alle Fragen mindestens einmal richtig beantwortet.</p>
+        </div>
+    </ng-template>
+
+    <ng-template #emptyTexts>
+        <div class="glass-card empty-state">
+            <div class="empty-icon">🎉</div>
+            <h3>Alle Texte bewertet</h3>
+            <p>Du hast bereits alle Englisch-Texte bewertet.</p>
+        </div>
+    </ng-template>
+
+    <div class="loading" *ngIf="loading">Lade Daten...</div>
 </div>

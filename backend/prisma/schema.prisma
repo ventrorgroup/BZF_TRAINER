@@ -57,3 +57,24 @@ model ExamResult {
   score     Int
   exam      Exam     @relation(fields: [examId], references: [id])
 }
+
+model BzfText {
+  id        Int      @id @default(autoincrement())
+  number    String   @unique
+  textEn    String
+  textDe    String
+  stats     TextStat?
+}
+
+model TextStat {
+  id          Int      @id @default(autoincrement())
+  textId      Int      @unique
+  difficulty  String   @default("unknown") // easy, medium, hard
+  isFavorite  Boolean  @default(false)
+  viewCount   Int      @default(0)
+  easyCount   Int      @default(0)
+  mediumCount Int      @default(0)
+  hardCount   Int      @default(0)
+  bzfText     BzfText  @relation(fields: [textId], references: [id])
+}
+

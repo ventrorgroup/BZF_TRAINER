@@ -1,0 +1,81 @@
+<div class="training-container" *ngIf="!loading && currentText">
+    <div class="toolbar glass-card">
+        <div class="nav-controls">
+            <button class="nav-btn" (click)="prev()" [disabled]="currentNumber === '1'">←</button>
+            <div class="number-selector">
+                <span>Text Nr.</span>
+                <input type="number" [(ngModel)]="currentNumber" (change)="loadText(currentNumber)" min="1" max="70">
+            </div>
+            <button class="nav-btn" (click)="next()" [disabled]="currentNumber === '70'">→</button>
+        </div>
+        
+        <div class="action-controls">
+            <button class="random-btn" (click)="loadRandom()">Zufall</button>
+            <button class="save-btn" (click)="toggleSave()" [class.saved]="isSaved">
+                <i class="star-icon">★</i>
+                {{ isSaved ? 'Gemerkt' : 'Merken' }}
+            </button>
+        </div>
+    </div>
+
+    <div class="stats-bar glass-card">
+        <span class="badge views" title="Wie oft aufgerufen">👁 {{ currentText.stats?.viewCount || 0 }}</span>
+        <span class="badge count easy">L: {{ currentText.stats?.easyCount || 0 }}</span>
+        <span class="badge count medium">M: {{ currentText.stats?.mediumCount || 0 }}</span>
+        <span class="badge count hard">S: {{ currentText.stats?.hardCount || 0 }}</span>
+        <span class="badge difficulty" [class]="currentText.stats?.difficulty" *ngIf="currentText.stats?.difficulty && currentText.stats?.difficulty !== 'unknown'">
+            Zuletzt: {{ currentText.stats?.difficulty }}
+        </span>
+    </div>
+
+    <div class="comparison-grid">
+        <div class="text-card glass-card en">
+            <div class="card-header">
+                <span class="lang-label">English</span>
+            </div>
+            <div class="text-content">
+                <div *ngFor="let line of formatText(currentText.textEn)" [class.bullet]="line.isBullet">
+                    <span class="bullet-marker" *ngIf="line.isBullet">{{ line.marker }}</span>
+                    <span class="line-text">{{ line.content }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-card glass-card de" [class.hidden]="!showTranslation">
+            <div class="card-header">
+                <span class="lang-label">Deutsch</span>
+            </div>
+            <div class="text-content" *ngIf="showTranslation" @fadeInOut>
+                <div *ngFor="let line of formatText(currentText.textDe)" [class.bullet]="line.isBullet">
+                    <span class="bullet-marker" *ngIf="line.isBullet">{{ line.marker }}</span>
+                    <span class="line-text">{{ line.content }}</span>
+                </div>
+            </div>
+            <div class="placeholder-content" *ngIf="!showTranslation">
+                <button class="show-btn" (click)="toggleTranslation()">Übersetzung anzeigen</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="rating-bar glass-card" *ngIf="showTranslation" @fadeInOut>
+        <p>Wie schwer war dieser Text?</p>
+        <div class="rating-buttons">
+            <button class="rate-btn easy" (click)="rate('easy')">Leicht</button>
+            <button class="rate-btn medium" (click)="rate('medium')">Mittel</button>
+            <button class="rate-btn hard" (click)="rate('hard')">Schwer</button>
+        </div>
+    </div>
+</div>
+
+<div class="loading-spinner" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Lade Text...</p>
+</div>
+
+<div class="error-container" *ngIf="!loading && error">
+    <div class="card error-card glass-card">
+        <h3>Text nicht gefunden</h3>
+        <p>Text Nummer {{currentNumber}} konnte nicht geladen werden.</p>
+        <button class="primary-btn" (click)="loadText('1')">Zu Nr. 1 zurück</button>
+    </div>
+</div>

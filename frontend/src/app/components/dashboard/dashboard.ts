@@ -73,4 +73,13 @@ export class DashboardComponent implements OnInit {
     if (!this.stats || (this.stats.totalCorrect + this.stats.totalIncorrect) === 0) return 0;
     return Math.round((this.stats.totalCorrect / (this.stats.totalCorrect + this.stats.totalIncorrect)) * 100);
   }
+
+  resetProgress() {
+    if (confirm('Bist du sicher, dass du deinen kompletten Lernfortschritt (Fragen und Texte) löschen möchtest? Dies kann nicht rückgängig gemacht werden.')) {
+      this.bzfService.resetStats().subscribe(() => {
+        this.loadStats();
+        alert('Fortschritt wurde zurückgesetzt.');
+      });
+    }
+  }
 }

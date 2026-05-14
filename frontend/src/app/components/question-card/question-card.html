@@ -3,6 +3,11 @@
     <div class="q-badge-info">
       <span class="q-badge">Frage {{question?.qNumber}}</span>
       <span class="q-category-tag">{{question?.category}}</span>
+      <span class="q-stats-tag">
+        <span class="stat-attempts" title="Gesamtanzahl Aufrufe">👁 {{ (question?.stats?.correct || 0) + (question?.stats?.incorrect || 0) }}</span>
+        <span class="stat-correct">✓ {{question?.stats?.correct || 0}}</span>
+        <span class="stat-wrong">✗ {{question?.stats?.incorrect || 0}}</span>
+      </span>
     </div>
     <div class="q-actions">
       <button class="btn-flag-minimal" [class.active]="isDifficult" (click)="toggleDifficult($event)" title="Frage merken">

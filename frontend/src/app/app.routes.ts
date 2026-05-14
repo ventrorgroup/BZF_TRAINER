@@ -5,6 +5,7 @@ import { ExamSimulationComponent } from './components/exam-simulation/exam-simul
 import { UnsureQuestionsComponent } from './components/unsure-questions/unsure-questions';
 import { SequentialLearningComponent } from './components/sequential-learning/sequential-learning';
 import { DifficultQuestionsComponent } from './components/difficult-questions/difficult-questions';
+import { EnglishTrainingComponent } from './components/english-training/english-training';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -14,4 +15,6 @@ export const routes: Routes = [
   { path: 'exams', component: ExamSimulationComponent },
   { path: 'unsure', component: UnsureQuestionsComponent },
   { path: 'difficult', component: DifficultQuestionsComponent },
+  { path: 'english', component: EnglishTrainingComponent },
 ];
+

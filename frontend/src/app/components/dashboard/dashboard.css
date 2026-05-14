@@ -1,4 +1,10 @@
-.dashboard {
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
   animation: fadeIn 0.5s ease-out;
 }
 
@@ -7,74 +13,290 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: 800;
+.dashboard-header {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* Stats Overview */
+.stats-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.stats-section h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .stat-item {
   padding: 1.5rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 .stat-value {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0.5rem 0;
-  color: var(--primary);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: white;
 }
 
-.charts-row {
+.stat-value.success { color: #22c55e; }
+.stat-value.primary { color: #6366f1; }
+
+.stat-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* Main Content Layout */
+.dashboard-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
 }
 
-.chart-container, .recent-exams {
+.main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Chart Card */
+.chart-container {
   padding: 1.5rem;
-  min-height: 450px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.badge {
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
 .chart-wrapper {
+  flex: 1;
   position: relative;
-  height: 350px;
-  width: 100%;
-  display: block;
+  min-height: 0;
+}
+
+/* Quick Access / Modes */
+.quick-access h3 {
+  margin-bottom: 1.5rem;
+}
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.mode-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mode-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.mode-icon {
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+}
+
+.mode-info h4 {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.mode-info p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.english-highlight {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* Side Column: Recent Exams */
+.recent-exams {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-exams h3 {
+  margin-bottom: 1.5rem;
 }
 
 .exam-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .exam-item {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+  border-radius: 12px;
   display: flex;
   justify-content: space-between;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.exam-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-date {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.exam-time {
+  font-size: 0.8rem;
+  color: #64748b;
 }
 
 .exam-score {
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
 }
 
-.exam-score.pass { color: #22c55e; }
-.exam-score.fail { color: #ef4444; }
+.exam-score.pass { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.exam-score.fail { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
 
 .no-data {
-  padding: 2rem;
-  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #64748b;
-  font-style: italic;
+  gap: 1rem;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+/* Footer / Danger Zone */
+.dashboard-footer {
+  margin-top: 2rem;
+}
+
+.danger-zone {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: rgba(239, 68, 68, 0.02);
+  border-color: rgba(239, 68, 68, 0.1);
+}
+
+.danger-info h4 {
+  color: #ef4444;
+  margin-bottom: 0.5rem;
+}
+
+.danger-info p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.btn-reset {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-reset:hover {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+  .stats-overview {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .danger-zone {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
 }

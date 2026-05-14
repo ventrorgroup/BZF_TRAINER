@@ -22,6 +22,7 @@
   font-weight: 600;
   line-height: 1.6;
   margin-bottom: 2rem;
+  white-space: pre-wrap;
 }
 
 .options-list {
@@ -109,6 +110,18 @@
   padding: 0.35rem 0.75rem;
   border-radius: 8px;
 }
+
+.q-stats-tag {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-left: 0.5rem;
+}
+
+.stat-attempts { color: #a5b4fc; margin-right: 0.25rem; }
+.stat-correct { color: #22c55e; }
+.stat-wrong { color: #ef4444; }
 
 .btn-flag-minimal {
   background: transparent;

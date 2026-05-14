@@ -2,16 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BzfService, Question } from '../../services/bzf.service';
 import { QuestionCardComponent } from '../question-card/question-card';
+import { TextCardComponent } from '../text-card/text-card';
 
 @Component({
   selector: 'app-unsure-questions',
   standalone: true,
-  imports: [CommonModule, QuestionCardComponent],
+  imports: [CommonModule, QuestionCardComponent, TextCardComponent],
   templateUrl: './unsure-questions.html',
   styleUrl: './unsure-questions.css'
 })
 export class UnsureQuestionsComponent implements OnInit {
   questions: Question[] = [];
+  texts: any[] = [];
+  activeTab: 'questions' | 'texts' = 'questions';
+  
   currentIndex: number = 0;
   showFeedback: boolean = false;
   loading: boolean = true;
@@ -19,17 +23,24 @@ export class UnsureQuestionsComponent implements OnInit {
   constructor(private bzfService: BzfService) {}
 
   ngOnInit() {
-    this.loadQuestions();
+    this.loadData();
   }
 
-  loadQuestions() {
+  loadData() {
     this.loading = true;
     this.bzfService.getUnsureQuestions().subscribe(data => {
       this.questions = data;
-      this.currentIndex = 0;
-      this.showFeedback = false;
       this.loading = false;
     });
+    this.bzfService.getTextsByDifficulty('unknown').subscribe(data => {
+      this.texts = data;
+    });
+  }
+
+  setTab(tab: 'questions' | 'texts') {
+    this.activeTab = tab;
+    this.currentIndex = 0;
+    this.showFeedback = false;
   }
 
   onAnswered(isCorrect: boolean) {
@@ -42,7 +53,7 @@ export class UnsureQuestionsComponent implements OnInit {
       this.currentIndex++;
       this.showFeedback = false;
     } else {
-      this.loadQuestions(); // Refetch
+      this.loadData();
     }
   }
 }

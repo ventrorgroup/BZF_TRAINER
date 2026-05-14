@@ -14,11 +14,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     <div class="nav-links">
       <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">Dashboard</a>
       <a routerLink="/learn" routerLinkActive="active" class="nav-item">Lern-Modus</a>
+      <a routerLink="/english" routerLinkActive="active" class="nav-item">Englisch</a>
       <a routerLink="/exams" routerLinkActive="active" class="nav-item">Prüfungen</a>
       <a routerLink="/unsure" routerLinkActive="active" class="nav-item">Unsicher</a>
       <a routerLink="/difficult" routerLinkActive="active" class="nav-item">Schwer</a>
     </div>
   </nav>
+
 
   <main class="content-area">
     <router-outlet></router-outlet>

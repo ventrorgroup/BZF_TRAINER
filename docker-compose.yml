@@ -10,6 +10,11 @@ services:
       POSTGRES_DB: bzftrainer
     ports:
       - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bzfuser -d bzftrainer"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     volumes:
       - bzf-db-data:/var/lib/postgresql/data
 
@@ -22,9 +27,11 @@ services:
       DATABASE_URL: postgres://bzfuser:bzfpassword@db:5432/bzftrainer
       PDF_PATH: /data/questions.pdf
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
-      - C:/Users/yanni/Downloads/2024Pruefungsfragen_BZFII_BZFI_pdf.pdf:/data/questions.pdf
+      - ./backend/data/questions.pdf:/data/questions.pdf
+
 
   frontend:
     build: ./frontend

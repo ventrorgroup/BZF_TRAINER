@@ -87,4 +87,23 @@ export class BzfService {
   resetStats(): Observable<any> {
     return this.http.post(`${this.apiUrl}/stats/reset`, {});
   }
+
+  // BZF English Texts
+  getRandomText(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/texts/random`);
+  }
+
+  getTextByNumber(num: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/texts/by-number/${num}`);
+  }
+
+  getTextsByDifficulty(diff: string): Observable<any[]> {
+
+    return this.http.get<any[]>(`${this.apiUrl}/texts/by-difficulty/${diff}`);
+  }
+
+  rateText(textId: number, difficulty: string, isFavorite?: boolean): Observable<any> {
+    return this.http.post(`${this.apiUrl}/texts/${textId}/rate`, { difficulty, isFavorite });
+  }
 }
+

@@ -1,70 +1,119 @@
-<div class="dashboard">
-  <h1 class="gradient-text">Willkommen zum BZF Trainer</h1>
-  
-  <div class="stats-grid" *ngIf="stats">
-    <div class="glass-card stat-item">
-      <h3>Fragen Abdeckung</h3>
-      <div class="stat-value">{{stats.answeredQuestions}} / {{stats.totalQuestions}}</div>
-      <p>Fragen bereits beantwortet</p>
-    </div>
-
-    <div class="glass-card stat-item">
-      <h3>Gesamt Erfolgsquote</h3>
-      <div class="stat-value">{{getSuccessRate()}}%</div>
-      <p>Basis: {{stats.totalCorrect + stats.totalIncorrect}} Antworten</p>
-    </div>
-
-    <div class="glass-card stat-item">
-      <h3>Häufigkeit Correct</h3>
-      <div class="stat-value">{{stats.totalCorrect}}</div>
-      <p>Richtig beantwortete Fragen</p>
-    </div>
-
-    <div class="glass-card stat-item">
-      <h3>Gemerkt (Schwer)</h3>
-      <div class="stat-value">{{stats.difficultCount}}</div>
-      <p>Fragen in der Merkliste</p>
-    </div>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1 class="gradient-text">BZF Trainer Pro</h1>
+    <p class="subtitle">Dein Weg zur Funksprechprüfung</p>
   </div>
-
-  <div class="charts-row">
-    <div class="glass-card chart-container">
-      <h3>Antwort-Verteilung</h3>
-      <div class="chart-wrapper">
-        <canvas baseChart
-          [data]="pieChartData"
-          [options]="pieChartOptions"
-          [type]="pieChartType">
-        </canvas>
+  
+  <div class="stats-overview" *ngIf="stats">
+    <!-- Theory Stats -->
+    <div class="stats-section">
+      <h3>Theorie-Training</h3>
+      <div class="stats-grid">
+        <div class="glass-card stat-item">
+          <div class="stat-label">Fortschritt</div>
+          <div class="stat-value">{{stats.answeredQuestions}} / {{stats.totalQuestions}}</div>
+          <div class="stat-desc">Fragen bearbeitet</div>
+        </div>
+        <div class="glass-card stat-item">
+          <div class="stat-label">Erfolgsquote</div>
+          <div class="stat-value success">{{getSuccessRate()}}%</div>
+          <div class="stat-desc">{{stats.totalCorrect}} Richtig / {{stats.totalIncorrect}} Falsch</div>
+        </div>
       </div>
     </div>
 
-    <div class="glass-card recent-exams">
-      <h3>Letzte Prüfungen</h3>
-      <div *ngIf="stats?.recentExams?.length === 0" class="no-data">Noch keine Prüfungen absolviert.</div>
-      <div class="exam-list" *ngIf="stats?.recentExams?.length > 0">
-        <div class="exam-item" *ngFor="let exam of stats.recentExams">
-          <div class="exam-date">{{exam.date | date:'dd.MM.yyyy HH:mm'}}</div>
-          <div class="exam-score" [class.pass]="exam.score >= 75" [class.fail]="exam.score < 75">
-            {{exam.score}}%
+    <!-- English Stats -->
+    <div class="stats-section">
+      <h3>Englisch-Training</h3>
+      <div class="stats-grid">
+        <div class="glass-card stat-item">
+          <div class="stat-label">Texte Bearbeitet</div>
+          <div class="stat-value">{{stats.englishStats.ratedTexts}} / {{stats.englishStats.totalTexts}}</div>
+          <div class="stat-desc">Bewertete Texte</div>
+        </div>
+        <div class="glass-card stat-item">
+          <div class="stat-label">Gesamt Aufrufe</div>
+          <div class="stat-value primary">{{stats.englishStats.totalViews}}</div>
+          <div class="stat-desc">Wiederholungen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="main-column">
+      <div class="glass-card chart-container">
+        <div class="card-header">
+          <h3>Antwort-Verteilung</h3>
+          <span class="badge">Theorie</span>
+        </div>
+        <div class="chart-wrapper">
+          <canvas baseChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="glass-card quick-access">
+        <h3>Lern-Modi</h3>
+        <div class="mode-grid">
+          <div class="mode-card glass-card" routerLink="/learn">
+            <div class="mode-icon">🎲</div>
+            <div class="mode-info">
+              <h4>Zufalls-Lernen</h4>
+              <p>Fragen im Mix trainieren</p>
+            </div>
+          </div>
+          <div class="mode-card glass-card" routerLink="/learn/sequential/1">
+            <div class="mode-icon">📖</div>
+            <div class="mode-info">
+              <h4>Fragen-Katalog</h4>
+              <p>Alle 261 Fragen nacheinander</p>
+            </div>
+          </div>
+          <div class="mode-card glass-card english-highlight" routerLink="/english">
+            <div class="mode-icon">🇬🇧</div>
+            <div class="mode-info">
+              <h4>Englisch-Training</h4>
+              <p>Texte übersetzen & bewerten</p>
+            </div>
           </div>
         </div>
       </div>
-      <button class="btn-primary" routerLink="/exams" style="margin-top: 1rem; width: 100%;">Neue Prüfung starten</button>
+    </div>
+
+    <div class="side-column">
+      <div class="glass-card recent-exams">
+        <h3>Letzte Prüfungen</h3>
+        <div *ngIf="stats?.recentExams?.length === 0" class="no-data">
+          <div class="empty-icon">📝</div>
+          <p>Noch keine Simulationen</p>
+        </div>
+        <div class="exam-list" *ngIf="stats?.recentExams?.length > 0">
+          <div class="exam-item" *ngFor="let exam of stats.recentExams">
+            <div class="exam-info">
+              <span class="exam-date">{{exam.date | date:'dd.MM.yyyy'}}</span>
+              <span class="exam-time">{{exam.date | date:'HH:mm'}} Uhr</span>
+            </div>
+            <div class="exam-score" [class.pass]="exam.score >= 75" [class.fail]="exam.score < 75">
+              {{exam.score}}%
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary" routerLink="/exams">Neue Prüfung starten</button>
+      </div>
     </div>
   </div>
 
-  <div class="quick-access glass-card" style="margin-top: 2rem;">
-    <h3>Lern-Modi</h3>
-    <div class="mode-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-      <div class="mode-card glass-card" style="cursor: pointer;" routerLink="/learn">
-        <h4>Zufalls-Lernen</h4>
-        <p>Fragen in zufälliger Reihenfolge zum Vertiefen.</p>
+  <div class="dashboard-footer">
+    <div class="danger-zone glass-card">
+      <div class="danger-info">
+        <h4>Daten-Management</h4>
+        <p>Setze alle Lernfortschritte und Statistiken zurück, um von vorn zu beginnen.</p>
       </div>
-      <div class="mode-card glass-card" style="cursor: pointer;" routerLink="/learn/sequential/1">
-        <h4>Fragen-Katalog</h4>
-        <p>Alle 261 Fragen der Reihe nach durchgehen.</p>
-      </div>
+      <button class="btn-reset" (click)="resetProgress()">Alles Zurücksetzen</button>
     </div>
   </div>
 </div>

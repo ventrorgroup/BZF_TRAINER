@@ -31,14 +31,11 @@ app.get('/api/questions/by-number/:num', async (req, res) => {
     res.json(question);
 });
 
-// Get unsure questions (incorrect > correct or not answered)
+// Get unsure questions (incorrect > correct)
 app.get('/api/questions/unsure', async (req, res) => {
     const questions = await prisma.question.findMany({
         where: {
-            OR: [
-                { stats: { incorrect: { gt: prisma.userStat.fields.correct } } },
-                { stats: { is: null } }
-            ]
+            stats: { incorrect: { gt: prisma.userStat.fields.correct } }
         },
         include: { answers: true, stats: true },
         take: 20
@@ -87,7 +84,101 @@ app.get('/api/questions/difficult', async (req, res) => {
     res.json(questions);
 });
 
+// --- BZF English Texts ---
+
+// Get random BZF text
+app.get('/api/texts/random', async (req, res) => {
+    const count = await prisma.bzfText.count();
+    if (count === 0) return res.json(null);
+    const skip = Math.floor(Math.random() * count);
+    const text = await prisma.bzfText.findFirst({
+        skip: skip,
+        include: { stats: true }
+    });
+
+    if (text) {
+        await prisma.textStat.upsert({
+            where: { textId: text.id },
+            update: { viewCount: { increment: 1 } },
+            create: { textId: text.id, viewCount: 1 }
+        });
+    }
+
+    res.json(text);
+});
+
+// Get BZF text by its number
+app.get('/api/texts/by-number/:num', async (req, res) => {
+    const text = await prisma.bzfText.findFirst({
+        where: { number: req.params.num },
+        include: { stats: true }
+    });
+
+    if (text) {
+        await prisma.textStat.upsert({
+            where: { textId: text.id },
+            update: { viewCount: { increment: 1 } },
+            create: { textId: text.id, viewCount: 1 }
+        });
+    }
+
+    res.json(text);
+});
+
+// Get texts by difficulty (or remembered)
+
+app.get('/api/texts/by-difficulty/:diff', async (req, res) => {
+    const { diff } = req.params;
+    let where;
+    if (diff === 'hard') {
+        where = { OR: [{ stats: { difficulty: 'hard' } }, { stats: { isFavorite: true } }] };
+    } else if (diff === 'unknown') {
+        where = { OR: [{ stats: { is: null } }, { stats: { difficulty: 'unknown' } }] };
+    } else {
+        where = { stats: { difficulty: diff } };
+    }
+        
+    const texts = await prisma.bzfText.findMany({
+        where: where,
+        include: { stats: true },
+        orderBy: { number: 'asc' }
+    });
+    res.json(texts);
+});
+
+// Rate a text
+app.post('/api/texts/:id/rate', async (req, res) => {
+    const textId = parseInt(req.params.id);
+    const { difficulty, isFavorite } = req.body;
+    
+    const updateData = {};
+    if (difficulty) {
+        updateData.difficulty = difficulty;
+        if (difficulty === 'easy') updateData.easyCount = { increment: 1 };
+        if (difficulty === 'medium') updateData.mediumCount = { increment: 1 };
+        if (difficulty === 'hard') updateData.hardCount = { increment: 1 };
+    }
+    if (isFavorite !== undefined) {
+        updateData.isFavorite = isFavorite;
+    }
+
+    const stat = await prisma.textStat.upsert({
+        where: { textId },
+        update: updateData,
+        create: { 
+            textId, 
+            difficulty: difficulty || 'unknown',
+            isFavorite: isFavorite || false,
+            easyCount: difficulty === 'easy' ? 1 : 0,
+            mediumCount: difficulty === 'medium' ? 1 : 0,
+            hardCount: difficulty === 'hard' ? 1 : 0
+        }
+    });
+    res.json(stat);
+});
+
 // Exams
+
 app.get('/api/exams', async (req, res) => {
     console.log('GET /api/exams requested');
     const exams = await prisma.exam.findMany({
@@ -145,33 +236,45 @@ app.get('/api/stats/dashboard', async (req, res) => {
         orderBy: { date: 'desc' }
     });
 
+    // English Text Stats
+    const totalTexts = await prisma.bzfText.count();
+    const ratedTexts = await prisma.textStat.count({
+        where: { difficulty: { not: 'unknown' } }
+    });
+    const favoriteTexts = await prisma.textStat.count({
+        where: { isFavorite: true }
+    });
+    const textViews = await prisma.textStat.aggregate({
+        _sum: { viewCount: true }
+    });
+
     res.json({
         totalQuestions,
         answeredQuestions,
         difficultCount,
         totalCorrect: stats._sum.correct || 0,
         totalIncorrect: stats._sum.incorrect || 0,
-        recentExams: examResults
+        recentExams: examResults,
+        englishStats: {
+            totalTexts,
+            ratedTexts,
+            favoriteTexts,
+            totalViews: textViews._sum.viewCount || 0
+        }
     });
 });
 
 // Reset Stats
 app.post('/api/stats/reset', async (req, res) => {
-    await prisma.userStat.deleteMany();
-    await prisma.examResult.deleteMany();
-    res.json({ success: true });
+    try {
+        await prisma.userStat.deleteMany();
+        await prisma.textStat.deleteMany();
+        await prisma.examResult.deleteMany();
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
-
-async function start() {
-    try {
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
-    } catch (error) {
-        console.error('Error starting server:', error);
-    }
-}
-
-start();
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
