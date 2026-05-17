@@ -40,7 +40,15 @@ export interface Exam {
   providedIn: 'root'
 })
 export class BzfService {
-  private apiUrl = '/api';
+  private get apiUrl(): string {
+    const port = window.location.port;
+    const hostname = window.location.hostname;
+    if (port === '5123') {
+      return '/api';
+    }
+    return `http://${hostname}:3000/api`;
+  }
+
 
   constructor(private http: HttpClient) {}
 
