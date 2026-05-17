@@ -13,13 +13,20 @@ async function seedQuestions() {
         return;
     }
 
-    if (!fs.existsSync(PDF_PATH)) {
-        console.error('PDF file not found at:', PDF_PATH);
-        return;
+    let finalPdfPath = PDF_PATH;
+    if (!fs.existsSync(finalPdfPath) || fs.statSync(finalPdfPath).isDirectory()) {
+        const localFallback = path.join(__dirname, 'data', 'questions.pdf');
+        if (fs.existsSync(localFallback) && !fs.statSync(localFallback).isDirectory()) {
+            console.log('Using local fallback PDF path:', localFallback);
+            finalPdfPath = localFallback;
+        } else {
+            console.error('PDF file not found or is a directory. Main path:', finalPdfPath, 'Fallback:', localFallback);
+            return;
+        }
     }
 
     try {
-        const dataBuffer = fs.readFileSync(PDF_PATH);
+        const dataBuffer = fs.readFileSync(finalPdfPath);
         const data = await pdfParse(dataBuffer);
         let text = data.text;
         
