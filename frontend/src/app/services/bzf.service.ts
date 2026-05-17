@@ -40,7 +40,7 @@ export interface Exam {
   providedIn: 'root'
 })
 export class BzfService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
