@@ -43,11 +43,21 @@ export class BzfService {
   private get apiUrl(): string {
     const port = window.location.port;
     const hostname = window.location.hostname;
-    if (port === '5123') {
-      return '/api';
+
+    // 1. If we are explicitly using the Angular development server (typically port 4200)
+    if (port === '4200') {
+      return `http://${hostname}:3000/api`;
     }
-    return `http://${hostname}:3000/api`;
+
+    // 2. If we are running on localhost but NOT using the Docker production port (5123) or standard ports (80/443)
+    if ((hostname === 'localhost' || hostname === '127.0.0.1') && port !== '5123' && port !== '') {
+      return 'http://localhost:3000/api';
+    }
+
+    // 3. For all production deployments (Coolify, Nginx proxy, Docker on 5123, etc.), relative '/api' is perfect
+    return '/api';
   }
+
 
 
   constructor(private http: HttpClient) {}
