@@ -81,3 +81,28 @@
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .result-card {
+    padding: 2rem 1.25rem;
+    margin: 1rem;
+  }
+  .big-score {
+    font-size: 3.5rem;
+  }
+  .result-msg {
+    font-size: 1rem;
+  }
+  .exam-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .exam-card {
+    padding: 1.25rem;
+  }
+  .exam-header {
+    margin-bottom: 1.25rem;
+  }
+}

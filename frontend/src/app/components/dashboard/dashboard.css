@@ -290,13 +290,66 @@
   }
 }
 
+/* ── Tablet ── */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1.25rem;
+    gap: 1.5rem;
+  }
+  .mode-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .chart-container {
+    height: 300px;
+  }
+}
+
+/* ── Mobile ── */
 @media (max-width: 600px) {
+  .dashboard-container {
+    padding: 1rem;
+    gap: 1.25rem;
+  }
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  .stats-overview {
+    gap: 1rem;
   }
   .danger-zone {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
+    padding: 1.25rem;
+  }
+  .chart-container {
+    height: 260px;
+    padding: 1rem;
+  }
+  .mode-grid {
+    grid-template-columns: 1fr;
+  }
+  .mode-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .stat-value {
+    font-size: 1.4rem;
+  }
+  .stat-item {
+    padding: 1rem;
+  }
+  .recent-exams {
+    padding: 1rem;
+  }
+}
+
+/* ── Extra small (< 400px) ── */
+@media (max-width: 400px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .q-badge-info {
+    flex-wrap: wrap;
   }
 }

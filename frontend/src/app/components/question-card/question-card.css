@@ -165,3 +165,50 @@
 
 .feedback-msg.success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
 .feedback-msg.error { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+/* ── Tablet ── */
+@media (max-width: 768px) {
+  .q-card {
+    padding: 1.25rem;
+  }
+  .q-text {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .q-card {
+    padding: 1rem;
+  }
+  .q-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+  .q-badge-info {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .q-stats-tag {
+    margin-left: 0;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .q-text {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .option {
+    padding: 0.875rem 1rem;
+  }
+  .q-actions {
+    align-self: flex-end;
+  }
+  .btn-flag-minimal {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}

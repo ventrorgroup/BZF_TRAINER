@@ -28,3 +28,17 @@
 .btn-primary {
   min-width: 200px;
 }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  .btn-primary {
+    min-width: unset;
+    width: 100%;
+  }
+  .actions {
+    margin-top: 1.25rem;
+  }
+}
