@@ -11,6 +11,42 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const APP_PASSWORD = 'BZF-Trainer-8jK9-mP4q';
+
+// Authentication Middleware
+const authMiddleware = (req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        return next();
+    }
+    const password = req.headers['x-bzf-password'] || req.headers['authorization'];
+    const providedPass = password ? password.replace(/^Bearer\s+/, '') : '';
+
+    if (providedPass === APP_PASSWORD) {
+        return next();
+    }
+    return res.status(401).json({ error: 'Unauthorized. Invalid password.' });
+};
+
+// Public Login Endpoint
+app.post('/api/auth/login', (req, res) => {
+    const { password } = req.body;
+    if (password === APP_PASSWORD) {
+        return res.json({ success: true, token: APP_PASSWORD });
+    }
+    return res.status(401).json({ success: false, error: 'Ungültiges Passwort' });
+});
+
+// Protect all /api/ paths except login
+app.use((req, res, next) => {
+    if (req.path === '/api/auth/login') {
+        return next();
+    }
+    if (req.path.startsWith('/api')) {
+        return authMiddleware(req, res, next);
+    }
+    next();
+});
+
 // Get random question
 app.get('/api/questions/random', async (req, res) => {
     const count = await prisma.question.count();

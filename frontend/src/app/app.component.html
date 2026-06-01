@@ -1,24 +1,29 @@
-<div class="app-container">
-  <nav class="glass-nav">
-    <div class="nav-header">
-      <div class="logo">
-        <span class="gradient-text">BZF Trainer Pro</span>
+@if (authService.isLoggedIn()) {
+  <div class="app-container">
+    <nav class="glass-nav">
+      <div class="nav-header">
+        <div class="logo">
+          <span class="gradient-text">BZF Trainer Pro</span>
+        </div>
+        <button class="hamburger" (click)="navOpen = !navOpen" aria-label="Menü öffnen">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <button class="hamburger" (click)="navOpen = !navOpen" aria-label="Menü öffnen">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="nav-links" [class.open]="navOpen">
-      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Dashboard</a>
-      <a routerLink="/learn" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Lern-Modus</a>
-      <a routerLink="/english" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Englisch</a>
-      <a routerLink="/exams" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Prüfungen</a>
-      <a routerLink="/unsure" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Unsicher</a>
-      <a routerLink="/difficult" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Schwer</a>
-    </div>
-  </nav>
+      <div class="nav-links" [class.open]="navOpen">
+        <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Dashboard</a>
+        <a routerLink="/learn" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Lern-Modus</a>
+        <a routerLink="/english" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Englisch</a>
+        <a routerLink="/exams" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Prüfungen</a>
+        <a routerLink="/unsure" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Unsicher</a>
+        <a routerLink="/difficult" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Schwer</a>
+        <button class="nav-item logout-nav-btn" (click)="logout()">Abmelden</button>
+      </div>
+    </nav>
 
-  <main class="content-area">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+} @else {
+  <app-login></app-login>
+}
