@@ -123,5 +123,10 @@ export class BzfService {
   rateText(textId: number, difficulty: string, isFavorite?: boolean): Observable<any> {
     return this.http.post(`${this.apiUrl}/texts/${textId}/rate`, { difficulty, isFavorite });
   }
+
+  // BZF Sprechfunk Simulationen
+  getSprechfunkSimulations(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/sprechfunk`);
+  }
 }
 

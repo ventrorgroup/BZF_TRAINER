@@ -1,0 +1,1513 @@
+[
+  {
+    "id": "koeln-bonn",
+    "title": "#1 Köln-Bonn",
+    "steps": [
+      {
+        "id": 1,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Köln-Bonn Delivery (Einleitungsanruf).",
+        "promptEn": "Call Köln-Bonn Delivery (initial call).",
+        "textEn": "Köln-Bonn Delivery, D-EPAH.",
+        "textDe": "Köln-Bonn Delivery, D-EPAH."
+      },
+      {
+        "id": 2,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Köln-Bonn Delivery.",
+        "textDe": "D-EPAH, Köln-Bonn Delivery."
+      },
+      {
+        "id": 3,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde deinen Standort (Apron A), dein Flugzeugmuster (P28A), deine Route (VFR über NOVEMBER) und bitte um die Abfluginformationen.",
+        "promptEn": "Report your location (Apron A), aircraft type (P28A), route (VFR via NOVEMBER) and request departure information.",
+        "textEn": "D-EPAH, P28A, Apron A, VFR via NOVEMBER route, request departure information.",
+        "textDe": "D-EPAH, P28A, Apron A, VFR über NOVEMBER Route, erbitte Abfluginformation."
+      },
+      {
+        "id": 4,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, runway 14L, wind 100 degrees 5 knots, visibility 4500 meters, temperature 8, dewpoint 2, QNH 1003, VFR not possible.",
+        "textDe": "D-EPAH, Piste 14L, Wind 100 Grad 5 Knoten, Sichtweite 4500m, Temperatur 8, Taupunkt 2, QNH 1003, VFR nicht möglich."
+      },
+      {
+        "id": 5,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Piste (14L) und das QNH (1003) und erbitte Sonder-VFR.",
+        "promptEn": "Acknowledge runway (14L) and QNH (1003), and request special VFR.",
+        "textEn": "Roger, request special VFR, runway 14L, QNH 1003, D-EPAH.",
+        "textDe": "Verstanden, erbitte Sonder-VFR, Piste 14L, QNH 1003, D-EPAH."
+      },
+      {
+        "id": 6,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, expect special-vfr clearance, contact Köln-Bonn Ground 121.730.",
+        "textDe": "D-EPAH, erwarten Sie Sonder-VFR-Freigabe, rufen Sie Köln-Bonn Radarkontrolle 121.730."
+      },
+      {
+        "id": 7,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du Sonder-VFR-Freigabe erwartest und die neue Ground-Frequenz (121.730).",
+        "promptEn": "Acknowledge expecting special VFR clearance and the new Ground frequency (121.730).",
+        "textEn": "Expecting special vfr clearance, 121.730, D-EPAH.",
+        "textDe": "Erwarte Sonder-VFR-Freigabe, 121.730, E-EPAH."
+      },
+      {
+        "id": 8,
+        "type": "instruction",
+        "textEn": "Tune in new frequency on the radio (Köln-Bonn Ground 121.730)",
+        "textDe": "neue Frequenz an der Funke einstellen (Köln-Bonn Ground 121.730)"
+      },
+      {
+        "id": 9,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Köln-Bonn Ground (Rollkontrolle) und bitte um Rollfreigabe (request taxi).",
+        "promptEn": "Call Köln-Bonn Ground and request taxi.",
+        "textEn": "Köln-Bonn Ground, D-EPAH, request taxi.",
+        "textDe": "Köln-Bonn Rollkontrolle, D-EPAH, erbitte rollen."
+      },
+      {
+        "id": 10,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Köln-Bonn Ground, taxi to holding point A5 runway 14L via B and A5.",
+        "textDe": "E-EPAH, Köln-Bonn Rollkontrolle, rollen Sie zum Rollhalt A5 Piste 14L über B und A5."
+      },
+      {
+        "id": 11,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Rollfreigabe zum Rollhalt A5 der Piste 14L über Rollweg B und A5.",
+        "promptEn": "Acknowledge taxi clearance to holding point A5 runway 14L via B and A5.",
+        "textEn": "Taxi to holding point runway 14L via B and A5, D-EPAH.",
+        "textDe": "Rolle zum Rollhalt A5 Piste 14L über B und A5, D-EPAH."
+      },
+      {
+        "id": 12,
+        "type": "instruction",
+        "textEn": "Taxi to Holding-Point",
+        "textDe": "Zum Holding-Point rollen"
+      },
+      {
+        "id": 13,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, taxi slower and give way to Eurowings Airbus A320 on taxiway A.",
+        "textDe": "D-EPAH, rollen Sie langsamer und gewähren Sie Eurowings Airbus A320 Vorfahrt, D-EPAH."
+      },
+      {
+        "id": 14,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du langsamer rollst und dem Eurowings Airbus A320 Vorfahrt gewährst.",
+        "promptEn": "Acknowledge slowing down and giving way to Eurowings Airbus A320.",
+        "textEn": "Slowing down and give way to Eurowings Airbus A320, D-EPAH.",
+        "textDe": "Rolle langsamer und gewähre Eurowings Airbus A320 Vorfahrt, D-EPAH."
+      },
+      {
+        "id": 15,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, when ready for departure contact Köln-Bonn Tower 124.980.",
+        "textDe": "D-EPAH, wenn abflugbereit rufen Sie Köln-Bonn Tower 124.980."
+      },
+      {
+        "id": 16,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du dich bei Abflugbereitschaft bei Tower auf 124.980 meldest.",
+        "promptEn": "Acknowledge contacting Tower on 124.980 when ready for departure.",
+        "textEn": "When ready for departure 124.980, D-EPAH.",
+        "textDe": "Wenn abflugbereit 124.980, D-EPAH."
+      },
+      {
+        "id": 17,
+        "type": "instruction",
+        "textEn": "Taxi to holding point and tune in new frequency (Köln-Bonn Tower 124.980)",
+        "textDe": "zum Holding-Point rollen und neue Frequenz einstellen (Köln-Bonn Tower 124.980)"
+      },
+      {
+        "id": 18,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich beim Tower abflugbereit am Rollhalt.",
+        "promptEn": "Call Tower and report ready for departure at the holding point.",
+        "textEn": "Köln-Bonn Tower, D-EPAH, ready for departure.",
+        "textDe": "Köln-Bonn Tower, D-EPAH, abflugbereit."
+      },
+      {
+        "id": 19,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Köln-Bonn Tower, unable to issue departure via NOVEMBER route, expect departure via ECHO route.",
+        "textDe": "D-EPAH, Köln-Bonn Tower, Abflug über NOVEMBER-Route nicht möglich, erwarten Sie Abflug über ECHO-Route."
+      },
+      {
+        "id": 20,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Anerkenne die Information (Verstanden, D-EPAH).",
+        "promptEn": "Acknowledge the information (Roger, D-EPAH).",
+        "textEn": "Roger, D-EPAH.",
+        "textDe": "Verstanden, D-EPAH."
+      },
+      {
+        "id": 21,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, leave control zone special VFR via ECHO route at 2000 feet or below, report ECHO 2, Squawk 2143.",
+        "textDe": "D-EPAH verlassen Sie Kontrollzone Sonder-VFR über ECHO Route in 2000 Fuß oder tiefer, melden Sie ECHO 2, Squawk 2142."
+      },
+      {
+        "id": 22,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Freigabe zum Verlassen der Kontrollzone über die ECHO-Route in 2000 Fuß oder tiefer, die Anweisung ECHO 2 zu melden sowie den Squawk 2143.",
+        "promptEn": "Acknowledge clearance to leave control zone via ECHO route at 2000 feet or below, reporting ECHO 2 and Squawk 2143.",
+        "textEn": "Roger, will leave control zone special VFR via ECHO route at 2000 feet or below, wilco, Squawk 2143, D-EPAH.",
+        "textDe": "Verstanden, verlasse Kontrollzone Sonder-VFR über ECHO Route in 2000 Fuß oder tiefer, Wilco, Squawk 2143, D-EPAH."
+      },
+      {
+        "id": 23,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, wind 100 degrees 5 knots, runway 14L cleared for takeoff.",
+        "textDe": "D-EPAH, Wind 100 Grad, 5 Knoten, Piste 14L, Start frei."
+      },
+      {
+        "id": 24,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Startfreigabe für Piste 14L.",
+        "promptEn": "Acknowledge takeoff clearance for runway 14L.",
+        "textEn": "Runway 14L cleared for takeoff, D-EPAH.",
+        "textDe": "Piste 14L, Start frei, D-EPAH."
+      },
+      {
+        "id": 25,
+        "type": "instruction",
+        "textEn": "Climb and fly via ECHO route",
+        "textDe": "Steigen und über ECHO fliegen"
+      },
+      {
+        "id": 26,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Erreichen des Meldepunkts ECHO 2 in deiner aktuellen Höhe.",
+        "promptEn": "Report reaching reporting point ECHO 2 at your current altitude.",
+        "textEn": "D-EPAH, ECHO 2 at 1800 feet.",
+        "textDe": "D-EPAH, ECHO 2 in 2000 Fuß."
+      },
+      {
+        "id": 27,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, proceed direct ECHO 1.",
+        "textDe": "D-EPAH, fliegen Sie direkt ECHO 1."
+      },
+      {
+        "id": 28,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Direktflug nach ECHO 1.",
+        "promptEn": "Acknowledge direct flight to ECHO 1.",
+        "textEn": "Proceeding direct ECHO 1, D-EPAH.",
+        "textDe": "Fliege direkt ECHO 1, E-EPAH."
+      },
+      {
+        "id": 29,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Erreichen von ECHO 1 in deiner aktuellen Höhe.",
+        "promptEn": "Report reaching ECHO 1 at your current altitude.",
+        "textEn": "D-EPAH, ECHO 1 at 1800 feet.",
+        "textDe": "E-EPAH, ECHO 1 in 1800 Fuß."
+      },
+      {
+        "id": 30,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Squawk VFR, approved to leave frequency.",
+        "textDe": "D-EPAH, Squawk VFR, Verlassen der Frequenz genehmigt."
+      },
+      {
+        "id": 31,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige Squawk VFR und das Verlassen der Frequenz.",
+        "promptEn": "Acknowledge Squawk VFR and approval to leave frequency.",
+        "textEn": "Squawk VFR, approved to leave frequency, D-EPAH.",
+        "textDe": "Squawk VFR, Verlassen der Frequenz genehmigt, D-EPAH."
+      },
+      {
+        "id": 32,
+        "type": "instruction",
+        "textEn": "Continue flying to destination, report to FIS (Langen Information) shortly before Hannover",
+        "textDe": "Nun weiterfliegen zum Ziel, kurz vor Hannover bei FIS (Langen Information) melden"
+      },
+      {
+        "id": 33,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Langen Information (Einleitungsanruf).",
+        "promptEn": "Call Langen Information (initial call).",
+        "textEn": "Langen Information, D-EPAH.",
+        "textDe": "Langen Information, D-EPAH."
+      },
+      {
+        "id": 34,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Langen Information.",
+        "textDe": "D-EPAH, Langen Information."
+      },
+      {
+        "id": 35,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Übermittle deinen Flugzeugtyp (P28A), Flugregeln (VFR von EDDK nach EDDH), Position (10 Meilen östlich von Bielefeld) und Höhe (FL55) und bitte um Verkehrsinformationen.",
+        "promptEn": "Report aircraft type (P28A), flight rules/route (VFR from EDDK to EDDH), position (10 miles east of Bielefeld), altitude (FL55) and request traffic information.",
+        "textEn": "D-EPAH, P28A, VFR from EDDK to EDDH, 10 miles east on Bielefeld at flight level 55, request traffic information.",
+        "textDe": "E-EPAH, P28A, VFR von EDDK nach EDDH, 10 Meilen östlich von Bielefeld auf Flugfläche 55, erbitte Verkehrsinformation."
+      },
+      {
+        "id": 36,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Squawk 7744, QNH Hannover 1010, no traffic reported.",
+        "textDe": "D-EPAH, Squawk 7744, QNH 1010, kein Verkehr gemeldet."
+      },
+      {
+        "id": 37,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige Squawk 7744 und QNH 1010.",
+        "promptEn": "Acknowledge Squawk 7744 and QNH 1010.",
+        "textEn": "Roger, squawk 7744, QNH 1010, D-EPAH.",
+        "textDe": "Verstanden, squawk 7744, QNH 1010, D-EPAH."
+      },
+      {
+        "id": 38,
+        "type": "instruction",
+        "textEn": "Obtain permission to enter airspace D near Hannover",
+        "textDe": "Genehmigung für Einflug in Luftraum D bei Hannover"
+      },
+      {
+        "id": 39,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Erbitte den Durchflug durch den Luftraum D auf deinem aktuellen Kurs und der Flugfläche 55.",
+        "promptEn": "Request crossing airspace D on present heading at FL55.",
+        "textEn": "D-EPAH, request crossing airspace D on present heading, FL 55.",
+        "textDe": "D-EPAH, erbitte Durchflug durch Luftraum D auf aktuellem Steuerkurs, Flugfläche 55."
+      },
+      {
+        "id": 40,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, contact Bremen Radar 131.330.",
+        "textDe": "D-EPAH, rufen Sie Bremen Radar 131.330."
+      },
+      {
+        "id": 41,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Frequenzwechsel zu Bremen Radar auf 131.330.",
+        "promptEn": "Acknowledge frequency change to Bremen Radar on 131.330.",
+        "textEn": "131.330, D-EPAH.",
+        "textDe": "131.330, D-EPAH."
+      },
+      {
+        "id": 42,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich bei Bremen Radar. Nenne deinen Typ (P28A), deine Position (querab Porta Westfalica), deine Höhe (FL55) und erbitte den Durchflug durch Luftraum D.",
+        "promptEn": "Call Bremen Radar. Report type (P28A), position (abeam Porta Westfalica), altitude (FL55) and request crossing airspace D.",
+        "textEn": "Bremen Radar, D-EPAH, P28A, abeam Porta Westfalica, VFR at flight level 55, request crossing airspace D on present heading, flight level 55.",
+        "textDe": "Bremen Radar, D-EPAH, querab Porta Westfalica, VFR in Flugfläche 55, erbitte Durchflug durch Luftraum D auf aktuellem Steuerkurs, Flugfläche 55."
+      },
+      {
+        "id": 43,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, identified, crossing approved on present heading, flight level 55.",
+        "textDe": "D-EPAH, identifiziert, Durchflug auf aktuellen Steuerkurs genehmigt, Flugfläche 55."
+      },
+      {
+        "id": 44,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Durchflugfreigabe auf deinem aktuellen Kurs und der Flugfläche 55.",
+        "promptEn": "Acknowledge crossing approval on present heading at FL55.",
+        "textEn": "Crossing approved on present heading, flight level 55, D-EPAH.",
+        "textDe": "Durchflug auf aktuellen Steuerkurs genehmigt, Flugfläche 55, D-EPAH."
+      },
+      {
+        "id": 45,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, you are entering airspace D.",
+        "textDe": "D-EPAH, Sie fliegen in Luftraum D ein."
+      },
+      {
+        "id": 46,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Information (Verstanden, D-EPAH).",
+        "promptEn": "Acknowledge the information (Roger, D-EPAH).",
+        "textEn": "Roger, D-EPAH.",
+        "textDe": "Verstanden, D-EPAH."
+      },
+      {
+        "id": 47,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, you are leaving airspace D, squawk VFR, approved to leave frequency.",
+        "textDe": "D-EPAH, Sie verlassen Luftraum D, squawk VFR, verlassen der Frequenz genehmigt."
+      },
+      {
+        "id": 48,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Verlassen des Luftraums D, Squawk VFR und das Verlassen der Frequenz.",
+        "promptEn": "Acknowledge leaving airspace D, Squawk VFR and frequency release.",
+        "textEn": "Roger, squawk VFR, approved to leave frequency, D-EPAH.",
+        "textDe": "Verstanden, squawk VFR, verlassen der Frequenz genehmigt, D-EPAH."
+      },
+      {
+        "id": 49,
+        "type": "instruction",
+        "textEn": "Continue flying to Hamburg, tune in Hamburg Tower frequency first (126.850 / standard)",
+        "textDe": "Weiter bis Hamburg fliegen, vorher neue Frequenz Hamburg Tower einrasten"
+      },
+      {
+        "id": 50,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Hamburg Tower (Einleitungsanruf).",
+        "promptEn": "Call Hamburg Tower (initial call).",
+        "textEn": "Hamburg Tower, D-EPAH.",
+        "textDe": "Hamburg Turm, D-EPAH."
+      },
+      {
+        "id": 51,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Hamburg Tower.",
+        "textDe": "D-EPAH, Hamburg Turm."
+      },
+      {
+        "id": 52,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde deinen Typ (P28A), deine Position (10 Meilen südlich von SIERRA 1) in 2000 Fuß und erbitte Freigabe zur Landung.",
+        "promptEn": "Report aircraft type (P28A), position (10 miles south of SIERRA 1) at 2000 feet and request clearance for landing.",
+        "textEn": "D-EPAH, P28A, VFR, 10 miles south of SIERRA 1 at 2000 feet, for landing.",
+        "textDe": "D-EPAH, P28A, VFR 10 Meilen südlich von SIERRA 1 in 2000 Fuß, zur Landung."
+      },
+      {
+        "id": 53,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, enter control zone via SIERRA 1 and SIERRA 2, runway 05, QNH 1006.",
+        "textDe": "D-AH, fliegen Sie in die Kontrollzone über SIERRA 1 und SIERRA 2, Piste 05, QNH 1006."
+      },
+      {
+        "id": 54,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Einflug in die Kontrollzone über SIERRA 1 und SIERRA 2 auf Piste 05 mit QNH 1006.",
+        "promptEn": "Acknowledge entering control zone via SIERRA 1 and SIERRA 2 for runway 05 with QNH 1006.",
+        "textEn": "Will enter control zone via SIERRA 1 and SIERRA 2, runway 05, QNH 1006, D-AH.",
+        "textDe": "Fliege in Kontrollzone über via SIERRA 1 und SIERRA 2, Piste 05, QNH 1006, D-AH."
+      },
+      {
+        "id": 55,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Erreichen des Meldepunkts SIERRA 1 in 2000 Fuß.",
+        "promptEn": "Report passing SIERRA 1 at 2000 feet.",
+        "textEn": "D-AH, SIERRA 1 at 2000 feet.",
+        "textDe": "D-AH, SIERRA 1 in 2000 Fuß."
+      },
+      {
+        "id": 56,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, roger, report SIERRA 2.",
+        "textDe": "D-AH, verstanden, Melden Sie SIERRA 2."
+      },
+      {
+        "id": 57,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du SIERRA 2 melden wirst.",
+        "promptEn": "Acknowledge instruction to report SIERRA 2.",
+        "textEn": "Wilco, D-AH.",
+        "textDe": "Melde SIERRA 2, D-AH."
+      },
+      {
+        "id": 58,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Erreichen von SIERRA 2 in 2000 Fuß.",
+        "promptEn": "Report passing SIERRA 2 at 2000 feet.",
+        "textEn": "D-AH, SIERRA 2 at 2000 feet.",
+        "textDe": "D-AH, SIERRA 2 in 2000 Fuß."
+      },
+      {
+        "id": 59,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, join traffic circuit runway 05, report right downwind.",
+        "textDe": "D-AH, fliegen Sie direkt in die Rechtsplatzrunde Piste 05, melden Sie rechten Gegenanflug."
+      },
+      {
+        "id": 60,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Einflug in die Rechtsplatzrunde für Piste 05 und dass du den rechten Gegenanflug melden wirst.",
+        "promptEn": "Acknowledge joining traffic circuit for runway 05 and reporting right downwind.",
+        "textEn": "Will join traffic circuit runway 05, wilco, D-AH.",
+        "textDe": "Werde direkt in Rechtsplatzrunde Piste 05 einfliegen, wilco, D-AH."
+      },
+      {
+        "id": 61,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich im rechten Gegenanflug der Piste 05.",
+        "promptEn": "Report on the right downwind leg of runway 05.",
+        "textEn": "D-AH, right downwind runway 05.",
+        "textDe": "D-AH, rechter Gegenanflug, Piste 05."
+      },
+      {
+        "id": 62,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, shorten downwind, report final.",
+        "textDe": "D-AH, verkürzen Sie rechten Gegenanflug, melden Sie Endanflug."
+      },
+      {
+        "id": 63,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du den Gegenanflug verkürzt und den Endanflug melden wirst.",
+        "promptEn": "Acknowledge shortening downwind and reporting final.",
+        "textEn": "Shortening downwind, wilco, D-AH.",
+        "textDe": "Verkürze rechten Gegenanflug, wilco, D-AH."
+      },
+      {
+        "id": 64,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich im Endanflug der Piste 05.",
+        "promptEn": "Report on final for runway 05.",
+        "textEn": "D-AH, final runway 05.",
+        "textDe": "D-AH, Endanflug Piste 05."
+      },
+      {
+        "id": 65,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, make long landing, wind 030 degrees 5 knots, runway 05 cleared to land.",
+        "textDe": "D-AH, machen Sie lange Landung, Wind 030 Grad 5 Knoten, Landung frei."
+      },
+      {
+        "id": 66,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du eine lange Landung machst und die Landefreigabe für Piste 05 erhalten hast.",
+        "promptEn": "Acknowledge landing clearance for runway 05 and making a long landing.",
+        "textEn": "Will make long landing, runway 05 cleared to land, D-AH.",
+        "textDe": "Mache lange Landung, Piste 05 Landung frei, D-AH."
+      },
+      {
+        "id": 67,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, vacate runway via A6 and contact Hamburg Ground on 121.805.",
+        "textDe": "D-AH, verlassen Sie Piste über A6 und rufen Sie Hamburg Rollkontrolle auf 121.805."
+      },
+      {
+        "id": 68,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Verlassen der Landebahn über A6 und den Frequenzwechsel zu Ground auf 121.805.",
+        "promptEn": "Acknowledge vacating runway via A6 and switching to Ground on 121.805.",
+        "textEn": "Vacating runway via A6, 121.805, D-AH.",
+        "textDe": "Verlasse Piste über A6, 121.805, D-AH."
+      },
+      {
+        "id": 69,
+        "type": "instruction",
+        "textEn": "Vacate runway via A6 and tune in new frequency (Hamburg Ground 121.805)",
+        "textDe": "über A6 abrollen und neue Frequenz einstellen (Hamburg Ground 121.805)"
+      },
+      {
+        "id": 70,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich bei Hamburg Ground (Rollkontrolle). Berichte, dass die Piste 05 über A6 verlassen wurde und erbitte Rollfreigabe zum GAT.",
+        "promptEn": "Call Hamburg Ground. Report runway 05 vacated via A6 and request taxi to GAT.",
+        "textEn": "Hamburg Ground, D-EPAH, runway 05 vacated via A6, request taxi to GAT.",
+        "textDe": "Hamburg Rollkontrolle, D-EPAH, Piste 05 verlassen über A6, erbitte rollen zum GAT."
+      },
+      {
+        "id": 71,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, taxi to Apron 4 via B6, D1, F, G and W, cross runway 33.",
+        "textDe": "D-AH, Hamburg Rollkontrolle, rollen Sie zu Apron 4 über B6, D1, F, G und W, überqueren Sie Piste 33."
+      },
+      {
+        "id": 72,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Rollfreigabe zum Apron 4 über B6, D1, F, G und W und dass du Piste 33 überqueren wirst.",
+        "promptEn": "Acknowledge taxi routing to Apron 4 via B6, D1, F, G and W, crossing runway 33.",
+        "textEn": "Taxi to Apron 4 via B6, D1, F, G and W, will cross runway 33, D-EPAH.",
+        "textDe": "Rolle zu Apron 4 über B6, D1, F, G und W, werde Piste 33 überqueren, D-EPAH."
+      },
+      {
+        "id": 73,
+        "type": "instruction",
+        "textEn": "Roll via taxiway to GAT",
+        "textDe": "über die Taxiway rollen zum GAT"
+      },
+      {
+        "id": 74,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich von der Frequenz ab (leaving frequency).",
+        "promptEn": "Report leaving the frequency.",
+        "textEn": "D-EPAH, leaving frequency.",
+        "textDe": "D-EPAH, verlasse Frequenz."
+      },
+      {
+        "id": 75,
+        "type": "message",
+        "role": "tower",
+        "textEn": "E-EPAH, roger.",
+        "textDe": "E-EPAH, verstanden."
+      }
+    ]
+  },
+  {
+    "id": "leipzig-nuernberg",
+    "title": "#2 Leipzig - Nürnberg",
+    "steps": [
+      {
+        "id": 1,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Leipzig Delivery (Einleitungsanruf).",
+        "promptEn": "Call Leipzig Delivery (initial call).",
+        "textEn": "Leipzig Delivery, D-EPAH.",
+        "textDe": "Leipzig Delivery, D-EPAH."
+      },
+      {
+        "id": 2,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Leipzig Delivery.",
+        "textDe": "D-EPAH, Leipzig Delivery."
+      },
+      {
+        "id": 3,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Nenne deinen Typ (P28A), deinen Standort (Apron 1, Position GAT), deine Flugregeln (VFR über SIERRA-Route), Information Zulu und erbitte Abfluginformationen.",
+        "promptEn": "Report your type (P28A), position (Apron 1, position GAT), flight rules (VFR via SIERRA route), information Zulu and request departure information.",
+        "textEn": "D-EPAH, P28A, Apron 1, position GAT, VFR via SIERRA route, information Zulu, request departure information.",
+        "textDe": "D-EPAH, P28A, Apron 1, am GAT, VFR über SIERRA Route, Information Zulu, erbitte Abfluginformation."
+      },
+      {
+        "id": 4,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, runway 26L, wind 240 degrees 10 knots, temperature 12, dew point 3, QNH 997.",
+        "textDe": "D-AH, Piste 26L, Wind 240 Grad 10 Knoten, Temperatur 12, Taupunkt 3, QNH 997."
+      },
+      {
+        "id": 5,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Piste (26L) und das QNH (997).",
+        "promptEn": "Acknowledge runway (26L) and QNH (997).",
+        "textEn": "Runway 26L, QNH 997, D-AH.",
+        "textDe": "Piste 26L, QNH 997, D-AH."
+      },
+      {
+        "id": 6,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, contact Leipzig Ground 121.805.",
+        "textDe": "D-AH, rufen Sie Leipzig Rollkontrolle 121.805."
+      },
+      {
+        "id": 7,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Frequenzwechsel zur Rollkontrolle auf 121.805.",
+        "promptEn": "Acknowledge frequency change to Leipzig Ground on 121.805.",
+        "textEn": "121.805, D-AH.",
+        "textDe": "121.805, D-AH."
+      },
+      {
+        "id": 8,
+        "type": "instruction",
+        "textEn": "Tune in new frequency on the radio, Leipzig Rollkontrolle (121.805)",
+        "textDe": "neue Frequenz in Funke einstellen, Leipzig Rollkontrolle (121.805)"
+      },
+      {
+        "id": 9,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Leipzig Ground (Rollkontrolle) und erbitte Rollfreigabe (request taxi).",
+        "promptEn": "Call Leipzig Ground and request taxi.",
+        "textEn": "Leipzig Ground, D-EPAH, request taxi.",
+        "textDe": "Leipzig Rollkontrolle, D-EPAH, erbitte rollen."
+      },
+      {
+        "id": 10,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Leipzig Ground, taxi to holding point runway 26L via N, N5, S5, T and S10, hold short of runway 26L.",
+        "textDe": "D-EPAH, Leipzig Rollkontrolle, rollen Sie zum Rollhalt Piste 26L über N, N5, S5, T und S10, halten Sie vor Piste 26L."
+      },
+      {
+        "id": 11,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Rollen zum Rollhalt 26L über N, N5, S5, T und S10 sowie die Anweisung, vor der Piste 26L zu halten.",
+        "promptEn": "Acknowledge taxiing to holding point runway 26L via N, N5, S5, T and S10, and holding short of runway 26L.",
+        "textEn": "Taxi to holding point runway 26L via N, N5, S5, T and S10, will hold short of runway 26L, D-EPAH.",
+        "textDe": "Rolle zum Rollhalt Piste 26L über N, H5, S5, T und S10, werde vor Piste 26L halten, D-EPAH."
+      },
+      {
+        "id": 12,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Erbitte den Abflug von der Pistenkreuzung H5 (intersection H5).",
+        "promptEn": "Request departure from runway 26L intersection H5.",
+        "textEn": "D-EPAH, request departure from runway 26L intersection H5.",
+        "textDe": "D-EPAH, erbitte Abflug von Piste 26L Rollbahneinmündung H5."
+      },
+      {
+        "id": 13,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, TORA runway 26L from intersection H5 1895 meters, taxi to holding point runway 26L intersection H5 via N and N5.",
+        "textDe": "D-EPAH, TORA Piste 26L von Rollbahneinmündung H5 1895 Meter, rollen Sie zum Rollhalt Piste 26L Rollbahneinmündung H5 über N und H5."
+      },
+      {
+        "id": 14,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Rollen zum Rollhalt Kreuzung H5 über N und H5.",
+        "promptEn": "Acknowledge taxiing to holding point intersection H5 via N and H5.",
+        "textEn": "Roger, taxi to holding point runway 26L intersection H5 via N and H5, D-EPAH.",
+        "textDe": "Verstanden, rolle zum Rollhalt Piste 26L Rollbahneinmündung H5 über N und H5, D-EPAH."
+      },
+      {
+        "id": 15,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, when ready for departure contact Leipzig Tower 121.105.",
+        "textDe": "D-EPAH, wenn abflugbereit rufen Sie Leipzig Turm 121.105."
+      },
+      {
+        "id": 16,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du dich bei Abflugbereitschaft bei Tower auf 121.105 meldest.",
+        "promptEn": "Acknowledge contacting Tower on 121.105 when ready.",
+        "textEn": "When ready for departure 121.105, D-EPAH.",
+        "textDe": "Wenn abflugbereit, 121.105, D-EPAH."
+      },
+      {
+        "id": 17,
+        "type": "instruction",
+        "textEn": "Drive to the holding point to avoid blocking the runway unnecessarily",
+        "textDe": "Nun zum Rollhalt fahren, um nicht unnötig lange auf Piste zu rollen"
+      },
+      {
+        "id": 18,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich am Rollhalt abflugbereit beim Tower.",
+        "promptEn": "Report ready for departure to Tower at the holding point.",
+        "textEn": "Leipzig Tower, D-EPAH, holding point runway 26L, ready for departure.",
+        "textDe": "Leipzig Turm, D-EPAH, Rollhalt Piste 26L, abflugbereit."
+      },
+      {
+        "id": 19,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Leipzig Tower, line up runway 26L and wait.",
+        "textDe": "D-EPAH, Leipzig Turm, rollen Sie zum Abflugpunkt Piste 26L, dort halten."
+      },
+      {
+        "id": 20,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Aufrollen auf Piste 26L und Warten.",
+        "promptEn": "Acknowledge lining up on runway 26L and waiting.",
+        "textEn": "Line up runway 26L and wait, D-EPAH.",
+        "textDe": "Rolle zum Abflugpunkt Piste 26L und halte dort, D-EPAH."
+      },
+      {
+        "id": 21,
+        "type": "instruction",
+        "textEn": "Line up on runway and wait",
+        "textDe": "Aus Piste einfahren und warten"
+      },
+      {
+        "id": 22,
+        "type": "message",
+        "role": "tower",
+        "textEn": "E-EPAH, leave control zone via SIERRA route, report SIERRA 2, wind 240 degrees 10 knots, runway 26L cleared for takeoff.",
+        "textDe": "D-EPAH, verlassen Sie Kontrollzone über SIERRA Route, melden Sie SIERRA 2, Wind 240 Grad 10 Knoten, Piste 26L Start frei."
+      },
+      {
+        "id": 23,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige Freigabe zum Verlassen über SIERRA-Route, die Meldepflicht SIERRA 2 sowie die Startfreigabe für 26L.",
+        "promptEn": "Acknowledge clearance to leave via SIERRA route, reporting SIERRA 2, and takeoff clearance on runway 26L.",
+        "textEn": "Will leave control zone via SIERRA route, wilco, runway 26L cleared for takeoff, D-EPAH.",
+        "textDe": "Verlasse Kontrollzone über SIERRA Route, wilco, Piste 26L Start frei, D-EPAH."
+      },
+      {
+        "id": 24,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde SIERRA 2 in deiner aktuellen Höhe von 1900 Fuß.",
+        "promptEn": "Report passing SIERRA 2 at 1900 feet.",
+        "textEn": "D-EPAH, SIERRA 2 at 1900 feet.",
+        "textDe": "D-EPAH, SIERRA 2 in 1900 Fuß."
+      },
+      {
+        "id": 25,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, approved to leave frequency.",
+        "textDe": "D-EPAH, verlassen der Frequenz genehmigt."
+      },
+      {
+        "id": 26,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Verlassen der Frequenz.",
+        "promptEn": "Acknowledge leaving the frequency.",
+        "textEn": "Leave frequency, D-EPAH.",
+        "textDe": "Verlasse Frequenz, D-EPAH."
+      },
+      {
+        "id": 27,
+        "type": "instruction",
+        "textEn": "Continue flying and contact Langen-Information",
+        "textDe": "nun weiter fliegen und Langen-Information"
+      },
+      {
+        "id": 28,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Langen Information (Einleitungsanruf).",
+        "promptEn": "Call Langen Information (initial call).",
+        "textEn": "Langen Information, D-EPAH.",
+        "textDe": "Langen Information, D-EPAH."
+      },
+      {
+        "id": 29,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Langen Information.",
+        "textDe": "D-EPAH, Langen Information."
+      },
+      {
+        "id": 30,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Übermittle deinen Typ (A28P), deine Route (VFR von EDDP nach EDDN), Position (10 Meilen südlich von Leipzig), Höhe (1900 Fuß) und erbitte Informationen über besondere Wettererscheinungen.",
+        "promptEn": "Report aircraft type (A28P), route (VFR from EDDP to EDDN), position (10 miles south of Leipzig), altitude (1900 feet) and request information about special weather phenomena.",
+        "textEn": "E-EPAH, A28P, VFR from EDDP to EDDN, 10 miles south of Leipzig at 1900 feet, request information about special weather phenomena.",
+        "textDe": "E-EPAH, A28P, VFR von EDDP nach EDDN, 10 Meilen südlich von Leipzig in 1900 Fuß, erbitte Information über besondere Wettererscheinungen."
+      },
+      {
+        "id": 31,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, squawk 7711, QNH 997.",
+        "textDe": "D-EPAH, squawk 7711, QNH 997."
+      },
+      {
+        "id": 32,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige Squawk 7711 und QNH 997.",
+        "promptEn": "Acknowledge Squawk 7711 and QNH 997.",
+        "textEn": "Squawk 7711, QNH 997, D-EPAH.",
+        "textDe": "Squawk 7711, QNH 997, D-EPAH."
+      },
+      {
+        "id": 33,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, SR22 reported moderate turbulence west of Gera, time 1100Z.",
+        "textDe": "D-EPAH, SR22 meldet mäßige Turbulenzen westlich von Gera, Uhrzeit 1100Z."
+      },
+      {
+        "id": 34,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Erhalt der Wettermeldung und melde das Verlassen der Frequenz.",
+        "promptEn": "Acknowledge the weather report and state leaving frequency.",
+        "textEn": "Roger, leaving frequency, D-EPAH.",
+        "textDe": "Verstanden, verlasse Ihre Frequenz, D-EPAH."
+      },
+      {
+        "id": 35,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, roger, squawk VFR.",
+        "textDe": "D-EPAH, verstanden, squawk VFR."
+      },
+      {
+        "id": 36,
+        "type": "instruction",
+        "textEn": "Enter Nürnberg control zone and switch to Nürnberg Tower frequency (118.300 / standard)",
+        "textDe": "in Nürnberg reinfliegen und Nürnberg Tower-Frequenz einschalten"
+      },
+      {
+        "id": 37,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Nürnberg Tower (Einleitungsanruf).",
+        "promptEn": "Call Nürnberg Tower (initial call).",
+        "textEn": "Nürnberg Tower, D-EPAH.",
+        "textDe": "Nürnberg Turm, D-EPAH."
+      },
+      {
+        "id": 38,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Nürnberg Tower.",
+        "textDe": "D-EPAH, Nürnberg Turm."
+      },
+      {
+        "id": 39,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Übermittle Typ (P28A), Position (10 Meilen nördlich/südlich von OSCAR), Höhe (3000 Fuß), Information Quebec und bitte um Landeinformationen.",
+        "promptEn": "Report aircraft type (P28A), position (10 miles north of OSCAR), altitude (3000 feet), information Quebec and request landing information.",
+        "textEn": "D-EPAH, P28A, VFR, 10 miles north of OSCAR at 3000 feet, information Quebec for landing.",
+        "textDe": "D-EPAH, P28A, VFR, 10 Meilen südlich von OSCAR in 3000 Fuß, Information Quebec, zur Landung."
+      },
+      {
+        "id": 40,
+        "type": "message",
+        "role": "tower",
+        "textEn": "E-EPAH, enter control zone via OSCAR, runway 10, QNH 1003.",
+        "textDe": "D-EPAH, fliegen Sie in die Kontrollzone über OSCAR, Piste 10, QNH 1003."
+      },
+      {
+        "id": 41,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Einflug über OSCAR, Piste 10 und das QNH 1003.",
+        "promptEn": "Acknowledge entering via OSCAR for runway 10 with QNH 1003.",
+        "textEn": "Will enter control zone via OSCAR, runway 10, QNH 1003, D-EPAH.",
+        "textDe": "Fliege in Kontrollzone über OSCAR, Piste 10, QNH 1003, D-EPAH."
+      },
+      {
+        "id": 42,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Erreichen von OSCAR in 2500 Fuß.",
+        "promptEn": "Report passing OSCAR at 2500 feet.",
+        "textEn": "D-EPAH, OSCAR at 2500 feet.",
+        "textDe": "D-EPAH, OSCAR in 2500 Fuß."
+      },
+      {
+        "id": 43,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, proceed direct to the field and hold north of Autobahn A3.",
+        "textDe": "D-EPAH, Fliegen Sie in Richtung des Platzes und halten Sie nördlich der Autobahn A3."
+      },
+      {
+        "id": 44,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Freigabe, direkt in Richtung des Platzes zu fliegen und nördlich der Autobahn A3 zu warten.",
+        "promptEn": "Acknowledge proceeding direct to the field and holding north of Autobahn A3.",
+        "textEn": "Proceeding direct to the field and will hold north of Autobahn A3, D-EPAH.",
+        "textDe": "Fliege in Richtung des Platzes und werde nördlich der Autobahn A3 halten, D-EPAH."
+      },
+      {
+        "id": 45,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, make a left three sixty, runway 10 closed.",
+        "textDe": "D-EPAH, machen Sie einen Vollkreis links, Piste 10 derzeit gesperrt."
+      },
+      {
+        "id": 46,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Anweisung, einen Vollkreis links zu fliegen, da die Piste 10 gesperrt ist.",
+        "promptEn": "Acknowledge instruction to fly a left 360 due to runway 10 being closed.",
+        "textEn": "Roger, making left three sixty, D-EPAH.",
+        "textDe": "Verstanden, mache Vollkreis links, D-EPAH."
+      },
+      {
+        "id": 47,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, after three sixty enter downwind runway 10.",
+        "textDe": "D-EPAH, nach Vollkreis fliegen Sie in den Gegenanflug Piste 10."
+      },
+      {
+        "id": 48,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du nach dem Vollkreis in den Gegenanflug der Piste 10 fliegen wirst.",
+        "promptEn": "Acknowledge entering downwind for runway 10 after the 360.",
+        "textEn": "Will enter downwind after three sixty Runway 10, D-EPAH.",
+        "textDe": "Fliege nach Vollkreis in den Gegenanflug Piste 10, D-EPAH."
+      },
+      {
+        "id": 49,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich im Gegenanflug der Piste 10.",
+        "promptEn": "Report on the downwind leg for runway 10.",
+        "textEn": "D-EPAH, downwind runway 10.",
+        "textDe": "D-EPAH, Gegenanflug Piste 10."
+      },
+      {
+        "id": 50,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, wind 140 degrees 5 knots, runway 10 cleared to land.",
+        "textDe": "D-EPAH, Wind 140 Grad 5 Knoten, Piste 10, Landung frei."
+      },
+      {
+        "id": 51,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Landefreigabe für Piste 10.",
+        "promptEn": "Acknowledge landing clearance for runway 10.",
+        "textEn": "Runway 10 cleared to land, D-EPAH.",
+        "textDe": "Piste 10 Landung frei, D-EPAH."
+      },
+      {
+        "id": 52,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, landing gear does not appear down.",
+        "textDe": "D-EPAH, Fahrwerk scheint nicht unten zu sein."
+      },
+      {
+        "id": 53,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Reagiere auf den Hinweis des Towers und leite das Durchstarten ein.",
+        "promptEn": "Acknowledge tower alert and state you are going around.",
+        "textEn": "Roger, going around, D-EPAH.",
+        "textDe": "Verstanden, starte durch, D-EPAH."
+      },
+      {
+        "id": 54,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, roger, enter traffic pattern runway 10.",
+        "textDe": "D-EPAH, verstanden, fliegen Sie erneut in Platzrunde Piste 10."
+      },
+      {
+        "id": 55,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du erneut in die Platzrunde der Piste 10 einfliegen wirst.",
+        "promptEn": "Acknowledge entering the traffic pattern for runway 10 again.",
+        "textEn": "Will enter traffic pattern runway 10, D-EPAH.",
+        "textDe": "Werde in Platzrunde Piste 10 fliegen, D-EPAH."
+      },
+      {
+        "id": 56,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, please confirm landing gear does not appear down.",
+        "textDe": "D-EPAH, bitte bestätigen Sie, ob Fahrwerk draußen ist."
+      },
+      {
+        "id": 57,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde, dass das Fahrwerk ausgefahren (draußen) zu sein scheint (Negativ, Fahrwerk draußen).",
+        "promptEn": "Report that landing gear appears to be down (Negative, landing gear down).",
+        "textEn": "D-EPAH, negative, landing gear appears to be down.",
+        "textDe": "D-EPAH, negativ, Fahrwerk ist draußen."
+      },
+      {
+        "id": 58,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, roger.",
+        "textDe": "Verstanden, D-EPAH."
+      },
+      {
+        "id": 59,
+        "type": "instruction",
+        "textEn": "Landing gear confirmed down, enter traffic circuit",
+        "textDe": "Fahrwerk nun wieder draußen, nun in Platzrunde einfliegen"
+      },
+      {
+        "id": 60,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich erneut im Gegenanflug der Piste 10 zur Landung.",
+        "promptEn": "Report on the downwind leg for runway 10 for landing.",
+        "textEn": "D-EPAH, downwind runway 10, for landing.",
+        "textDe": "D-EPAH, Gegenanflug Piste 10, zur Landung."
+      },
+      {
+        "id": 61,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, wind 140 degrees 5 knots, runway 10 cleared to land.",
+        "textDe": "D-EPAH, Wind 140 Grad 5 Knoten, Piste 10 Landung frei."
+      },
+      {
+        "id": 62,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Landefreigabe für Piste 10.",
+        "promptEn": "Acknowledge landing clearance for runway 10.",
+        "textEn": "Runway 10 cleared to land, D-EPAH.",
+        "textDe": "Piste 10 Landung frei, D-EPAH."
+      },
+      {
+        "id": 63,
+        "type": "instruction",
+        "textEn": "Now landed, vacate runway via taxiway D",
+        "textDe": "Nun gelandet und Piste über D verlassen"
+      },
+      {
+        "id": 64,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Verlassen der Landebahn über D.",
+        "promptEn": "Report runway vacated via D.",
+        "textEn": "D-EPAH, runway vacated via D.",
+        "textDe": "D-EPAH, Piste verlassen über D."
+      },
+      {
+        "id": 65,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, contact Nürnberg Ground 121.760.",
+        "textDe": "D-EPAH, rufen Sie Nürnberg Rollkontrolle 121.760."
+      },
+      {
+        "id": 66,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Frequenzwechsel zur Rollkontrolle auf 121.760.",
+        "promptEn": "Acknowledge frequency change to Nürnberg Ground on 121.760.",
+        "textEn": "121.760, D-EPAH.",
+        "textDe": "121.760, D-EPAH."
+      },
+      {
+        "id": 67,
+        "type": "instruction",
+        "textEn": "Tune in new frequency on the radio (Nürnberg Ground 121.760)",
+        "textDe": "neue Frequenz einrasten (Nürnberg Ground 121.760)"
+      },
+      {
+        "id": 68,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Nürnberg Rollkontrolle und bitte um Rollfreigabe zur Abstellfläche.",
+        "promptEn": "Call Nürnberg Ground and request taxi to the apron.",
+        "textEn": "Nürnberg Ground, D-EPAH, request taxi to apron.",
+        "textDe": "Nürnberg Rollkontrolle, D-EPAH, erbitte rollen zur Abstellfläche."
+      },
+      {
+        "id": 69,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Nürnberg Ground, taxi to apron G3 via D, F, J and N4, report leaving frequency.",
+        "textDe": "D-EPAH, Nürnberg Rollkontrolle, rollen Sie zur Abstellfläche G3 über D, F, J und N4, melden Sie verlassen der Frequenz."
+      },
+      {
+        "id": 70,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Rollanweisung zur Abstellfläche G3 über D, F, J und N4.",
+        "promptEn": "Acknowledge taxi routing to apron G3 via D, F, J and N4.",
+        "textEn": "Taxi to apron G3 via D, F, J and N4, wilco, D-EPAH.",
+        "textDe": "Rolle zur Abstellfläche G3 über D, F, J und N4, wilco, D-EPAH."
+      },
+      {
+        "id": 71,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Verlassen der Frequenz.",
+        "promptEn": "Report leaving the frequency.",
+        "textEn": "D-EPAH, leaving frequency.",
+        "textDe": "D-EPAH, verlasse Frequenz."
+      },
+      {
+        "id": 72,
+        "type": "message",
+        "role": "tower",
+        "textEn": "E-EPAH, roger.",
+        "textDe": "E-EPAH, verstanden."
+      }
+    ]
+  },
+  {
+    "id": "hannover",
+    "title": "#3 Hannover",
+    "steps": [
+      {
+        "id": 1,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Hannover Rollkontrolle (Einleitungsanruf).",
+        "promptEn": "Call Hannover Ground (initial call).",
+        "textEn": "Hannover Ground, D-EPAH.",
+        "textDe": "Hannover Rollkontrolle, D-EPAH."
+      },
+      {
+        "id": 2,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Hannover Ground.",
+        "textDe": "D-EPAH, Hannover Rollkontrolle."
+      },
+      {
+        "id": 3,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde deinen Typ (P28A), Standort (Abstellfläche Allgemeine Luftfahrt 1), Route (VFR über ECHO-Route), Information Charlie und bitte um Rollfreigabe.",
+        "promptEn": "Report type (P28A), position (GA apron 1), route (VFR via ECHO route), information Charlie and request taxi.",
+        "textEn": "D-EPAH, P28A, general aviation apron 1, VFR via ECHO route, information CHARLIE, request taxi.",
+        "textDe": "D-EPAH, P28A, Abstellfläche Allgemeine Luftfahrt 1, VFR via ECHO Route, Information CHARLIE, erbitte rollen."
+      },
+      {
+        "id": 4,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, taxi to holding point runway 09C via O, M and L, QNH 1020.",
+        "textDe": "D-AH, rollen Sie zum Rollhalt Piste 09C über O, M und L, QNH 1020."
+      },
+      {
+        "id": 5,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Rollen zum Rollhalt 09C über O, M und L sowie das QNH 1020.",
+        "promptEn": "Acknowledge taxiing to holding point runway 09C via O, M and L, and QNH 1020.",
+        "textEn": "Taxi to holding point runway 09C via O, M and L, QNH 1020, D-AH.",
+        "textDe": "Rolle zum Rollhalt Piste 09C über O, M und L, QNH 1020, D-AH."
+      },
+      {
+        "id": 6,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-AH, when ready for departure contact Hannover Tower 120.180.",
+        "textDe": "D-AH, wenn abflugbereit kontaktieren Sie Hannover Turm 120.180."
+      },
+      {
+        "id": 7,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige, dass du dich bei Abflugbereitschaft bei Hannover Tower auf 120.180 meldest.",
+        "promptEn": "Acknowledge contacting Tower on 120.180 when ready.",
+        "textEn": "When ready for departure 120.180, D-AH.",
+        "textDe": "Wenn abflugbereit 120.180, D-AH."
+      },
+      {
+        "id": 8,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde dich beim Tower abflugbereit am Rollhalt.",
+        "promptEn": "Call Tower and report ready for departure.",
+        "textEn": "Hannover Tower, D-EPAH, ready for departure.",
+        "textDe": "Hannover Turm, D-EPAH, abflugbereit."
+      },
+      {
+        "id": 9,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Hannover Tower, unable to issue departure via ECHO, leave control zone on runway heading at 2000 feet or below, report passing the Autobahn A7.",
+        "textDe": "D-EPAH, Abflug über ECHO nicht möglich, verlassen Sie Kontrollzone in Pistenrichtung in 2000 Fuß oder tiefer, melden Sie Überflug von Autobahn 7."
+      },
+      {
+        "id": 10,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Anweisung, die Kontrollzone in Pistenrichtung (runway heading) in 2000 Fuß oder tiefer zu verlassen und den Überflug der Autobahn A7 zu melden.",
+        "promptEn": "Acknowledge instruction to leave control zone on runway heading at 2000 feet or below and reporting passing Autobahn A7.",
+        "textEn": "Roger, will leave control zone on runway heading at 2000 feet or below, wilco, D-EPAH.",
+        "textDe": "Verstanden, verlasse Kontrollzone in Pistenrichtung in 2000 Fuß oder tiefer, wilco, D-EPAH."
+      },
+      {
+        "id": 11,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, wind 120 degrees 8 knots, runway 09C cleared for takeoff.",
+        "textDe": "D-EPAH, Wind 120 Grad 8 Knoten, Piste 09C, Start frei."
+      },
+      {
+        "id": 12,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Startfreigabe für Piste 09C.",
+        "promptEn": "Acknowledge takeoff clearance for runway 09C.",
+        "textEn": "Runway 09C cleared for takeoff, D-EPAH.",
+        "textDe": "Piste 09C Start frei, D-EPAH."
+      },
+      {
+        "id": 13,
+        "type": "instruction",
+        "textEn": "Departure phase - climb to altitude",
+        "textDe": "Abflug - Steigen auf Höhe"
+      },
+      {
+        "id": 14,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde den Überflug der Autobahn A7 in 1700 Fuß.",
+        "promptEn": "Report passing Autobahn A7 at 1700 feet.",
+        "textEn": "D-EPAH, Autobahn A7 at 1700 feet.",
+        "textDe": "D-EPAH, Autobahn 7 in 1700 Fuß."
+      },
+      {
+        "id": 15,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, proceed direct Burgdorf, report passing Burgdorf.",
+        "textDe": "D-EPAH, fliegen Sie weiter zu Burgdorf, melden Sie Überflug von Burgdorf."
+      },
+      {
+        "id": 16,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Anweisung, direkt nach Burgdorf zu fliegen und den Überflug dort zu melden.",
+        "promptEn": "Acknowledge routing direct to Burgdorf and reporting passing it.",
+        "textEn": "Proceeding direct Burgdorf, wilco, D-EPAH.",
+        "textDe": "Flieger direkt zu Burgdorf, wilco, D-EPAH."
+      },
+      {
+        "id": 17,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde den Überflug von Burgdorf in 2000 Fuß.",
+        "promptEn": "Report passing Burgdorf at 2000 feet.",
+        "textEn": "D-EPAH, Burgdorf at 2000 feet.",
+        "textDe": "D-EPAH, Burgdorf in 2000 Fuß."
+      },
+      {
+        "id": 18,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, approved to leave frequency.",
+        "textDe": "D-EPAH, verlassen der Frequenz genehmigt."
+      },
+      {
+        "id": 19,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige das Verlassen der Frequenz.",
+        "promptEn": "Acknowledge leaving the frequency.",
+        "textEn": "Approved to leave frequency, D-EPAH.",
+        "textDe": "Verlasse die Frequenz, D-EPAH."
+      },
+      {
+        "id": 20,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Wiedereinflugsphase: Rufe Hannover Tower (Einleitungsanruf).",
+        "promptEn": "Re-entry phase: Call Hannover Tower (initial call).",
+        "textEn": "Hannover Tower, D-EPAH.",
+        "textDe": "Hannover Turm, D-EPAH."
+      },
+      {
+        "id": 21,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Hannover Tower.",
+        "textDe": "D-EPAH, Hannover Turm."
+      },
+      {
+        "id": 22,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde Typ (P28A), Position (5 Minuten östlich von WHISKEY 1), Höhe (2300 Fuß), Information Foxtrot und erbitte Landeinformationen.",
+        "promptEn": "Report type (P28A), position (5 minutes east of WHISKEY 1), altitude (2300 feet), information Foxtrot and request landing details.",
+        "textEn": "D-EPAH, P28A, VFR, 5 minutes east of WHISKEY 1 at 2300 feet, information FOXTROT, for landing.",
+        "textDe": "D-EPAH, P28A, VFR 5 Minuten östlich von WHISKEY 1 in 2300 Fuß, Information FOXTROT, zur Landung."
+      },
+      {
+        "id": 23,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, enter control zone via WHISKEY 1, runway 09L and 09R, QNH 1020.",
+        "textDe": "D-EPAH, fliegen Sie in Kontrollzone über WHISKEY 1, Piste 09L und 09R, QNH 1020."
+      },
+      {
+        "id": 24,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Einflug über WHISKEY 1, Pisten 09L und 09R, und das QNH 1020.",
+        "promptEn": "Acknowledge entering via WHISKEY 1 for runways 09L/09R with QNH 1020.",
+        "textEn": "Will enter control zone via WHISKEY 1, runway 09L and 09R, QNH 1020, D-EPAH.",
+        "textDe": "Werde in Kontrollzone über WHISKEY 1 einfliegen, Piste 09L und 09R, QNH 1020, D-EPAH."
+      },
+      {
+        "id": 25,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde WHISKEY 1 in 2300 Fuß und erbitte Direktanflug auf Piste 09L.",
+        "promptEn": "Report WHISKEY 1 at 2300 feet and request direct approach for runway 09L.",
+        "textEn": "D-EPAH, WHISKEY 1 at 2300 feet, request direct approach runway 09L.",
+        "textDe": "D-EPAH, WHISKEY 1 in 2300 Fuß, erbitte Direktanflug auf Piste 09L."
+      },
+      {
+        "id": 26,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, roger, proceed direct WHISKEY 2, expect direct approach runway 09L.",
+        "textDe": "D-EPAH, verstanden, fliegen Sie weiter zu WHISKEY 2, erwarte Direktanflug auf Piste 09L."
+      },
+      {
+        "id": 27,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Flug direkt nach WHISKEY 2 und dass du Direktanflug auf Piste 09L erwartest.",
+        "promptEn": "Acknowledge proceeding direct to WHISKEY 2 and expecting direct approach to runway 09L.",
+        "textEn": "Proceeding direct WHISKEY 2, expect direct approach runway 09L, D-EPAH.",
+        "textDe": "Fliege direkt WHISKEY 2, erwarte Direktanflug Piste 09L, D-EPAH."
+      },
+      {
+        "id": 28,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde WHISKEY 2 in 2300 Fuß.",
+        "promptEn": "Report WHISKEY 2 at 2300 feet.",
+        "textEn": "D-EPAH, WHISKEY 2 at 2300 feet.",
+        "textDe": "D-EPAH, WHISKEY 2 in 2300 Fuß."
+      },
+      {
+        "id": 29,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, proceed direct final runway 09L, heading 040, report final.",
+        "textDe": "D-EPAH, fliegen Sie direkt in den Endanflug Piste 09L, Kurs 040, Melden Sie Endanflug."
+      },
+      {
+        "id": 30,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Direktflug in den Endanflug Piste 09L auf Steuerkurs 040 und dass du den Endanflug melden wirst.",
+        "promptEn": "Acknowledge direct to final runway 09L, heading 040, and reporting final.",
+        "textEn": "Proceeding direct final runway 09L, heading 040, wilco, D-EPAH.",
+        "textDe": "Fliege direkt in den Endanflug Piste 09L, Kurs 040, wilco, D-EPAH."
+      },
+      {
+        "id": 31,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde den Endanflug der Piste 09L.",
+        "promptEn": "Report final runway 09L.",
+        "textEn": "D-EPAH, final runway 09L.",
+        "textDe": "D-EPAH, Endanflug Piste 09L."
+      },
+      {
+        "id": 32,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, vacate runway via L, wind 120 degrees 8 knots, runway 09L cleared to land.",
+        "textDe": "D-EPAH, verlassen Sie Piste über L, Wind 120 Grad 8 Knoten, Piste 09L Landung frei."
+      },
+      {
+        "id": 33,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige die Landefreigabe auf Piste 09L und das geplante Verlassen über L.",
+        "promptEn": "Acknowledge landing clearance for runway 09L and vacating via L.",
+        "textEn": "Will vacate runway via L, runway 09L cleared to land, D-EPAH.",
+        "textDe": "Verlasse Piste über L, Piste 09L, Landung frei, D-EPAH."
+      },
+      {
+        "id": 34,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, contact Hannover Ground 121.955.",
+        "textDe": "D-EPAH, rufen Sie Hannover Rollkontrolle 121.955."
+      },
+      {
+        "id": 35,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige den Frequenzwechsel zur Rollkontrolle auf 121.955.",
+        "promptEn": "Acknowledge frequency change to Ground on 121.955.",
+        "textEn": "121.955, D-EPAH.",
+        "textDe": "121.955, D-EPAH."
+      },
+      {
+        "id": 36,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Rufe Hannover Rollkontrolle auf der neuen Frequenz. Melde, dass du die Piste über L verlassen hast und bitte um Rollfreigabe zum GAT.",
+        "promptEn": "Call Hannover Ground. Report runway vacated via L and request taxi to GAT.",
+        "textEn": "Hannover Ground, D-EPAH, request taxi to GAT.",
+        "textDe": "Hannover Rollkontrolle, D-EPAH, erbitte rollen zum GAT."
+      },
+      {
+        "id": 37,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, Hannover Ground, taxi to general aviation apron 1 via L, F and M, cross runway 09C, report leaving frequency.",
+        "textDe": "D-EPAH, Hannover Rollkontrolle, rollen sie zur Abstellfläche allgemeine Luftfahrt 1 über L, F und M, überqueren Sie Piste 09C, melden Sie verlassen der Frequenz."
+      },
+      {
+        "id": 38,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Bestätige Rollfreigabe zur Abstellfläche 1 über L, F und M, das Überqueren der Piste 09C und die Pflicht, das Frequenzverlassen zu melden.",
+        "promptEn": "Acknowledge taxi routing to GA apron 1 via L, F and M, crossing runway 09C, and reporting leaving frequency.",
+        "textEn": "Taxi to general aviation apron 1 via L, F and M, will cross runway 09C, wilco, D-EPAH.",
+        "textDe": "Rolle zur Abstellfläche allgemeine Luftfahrt 1 über L, F und M, werde Piste 09C überqueren, wilco, D-EPAH."
+      },
+      {
+        "id": 39,
+        "type": "message",
+        "role": "pilot",
+        "promptDe": "Melde das Verlassen der Frequenz (leaving frequency).",
+        "promptEn": "Report leaving the frequency.",
+        "textEn": "D-EPAH, leaving frequency.",
+        "textDe": "D-EPAH, verlasse die Frequenz."
+      },
+      {
+        "id": 40,
+        "type": "message",
+        "role": "tower",
+        "textEn": "D-EPAH, roger.",
+        "textDe": "D-EPAH, verstanden."
+      }
+    ]
+  }
+]

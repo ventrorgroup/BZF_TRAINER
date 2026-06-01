@@ -312,5 +312,19 @@ app.post('/api/stats/reset', async (req, res) => {
     }
 });
 
+// --- BZF Sprechfunk Simulationen ---
+app.get('/api/sprechfunk', (req, res) => {
+    try {
+        const filePath = path.join(__dirname, 'data', 'sprechfunk-simulationen.json');
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).json({ error: 'Simulations data not found' });
+        }
+        const data = fs.readFileSync(filePath, 'utf8');
+        res.json(JSON.parse(data));
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
