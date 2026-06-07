@@ -63,104 +63,138 @@
           <span class="progress-text">Fortschritt: {{ progressPercentage }}%</span>
         </div>
 
-        <!-- Scrollable Conversation History -->
-        <div class="conversation-history" #historyContainer>
-          <div class="scroll-content">
-            @for (step of revealedSteps; track $index) {
-              <!-- Message Turn -->
-              @if (step.type === 'message') {
-                <div class="chat-bubble-container" [class.pilot]="step.role === 'pilot'" [class.tower]="step.role === 'tower'">
-                  <div class="chat-bubble">
-                    <span class="sender-label">
-                      {{ step.role === 'pilot' ? 'Pilot (D-EPAH)' : 'Tower / Controller' }}
-                    </span>
-                    <p class="bubble-text">
-                      {{ language === 'de' ? step.textDe : step.textEn }}
-                    </p>
-                  </div>
-                </div>
-              }
-
-              <!-- Instruction callout -->
-              @if (step.type === 'instruction') {
-                <div class="instruction-callout">
-                  <div class="instruction-box">
-                    <span class="hand-icon">👉</span>
-                    <span class="instruction-text">
-                      {{ language === 'de' ? step.textDe : step.textEn }}
-                    </span>
-                  </div>
-                </div>
-              }
-            }
-
-            <!-- Simulation Finished State inside history -->
-            @if (isFinished) {
-              <div class="finished-callout" @fade>
-                <div class="finished-box">
-                  <span class="check-icon">🏆</span>
-                  <h3>Simulation erfolgreich beendet!</h3>
-                  <p>Du hast das Sprechfunkverfahren für {{ selectedSimulation.title }} vollständig absolviert.</p>
-                </div>
+        <!-- Simulator Main Split Layout -->
+        <div class="simulator-main-content">
+          
+          <!-- Map Column (Left) -->
+          <div class="map-column">
+            <!-- Cockpit Instruments Display Widget -->
+            <div class="cockpit-panel">
+              <div class="gauge com1">
+                <span class="gauge-label">COM1 ACTIVE</span>
+                <span class="gauge-value font-mono">{{ activeFrequency || '---.---' }}</span>
               </div>
-            }
-          </div>
-        </div>
-
-        <!-- Interactive Control Panel at Bottom -->
-        <footer class="control-panel">
-          @if (isFinished) {
-            <div class="action-buttons-finished">
-              <button class="btn-primary" (click)="resetSimulation()">Nochmal starten</button>
-              <button class="btn-secondary" (click)="exitSimulation()">Zurück zur Übersicht</button>
+              <div class="gauge xpdr">
+                <span class="gauge-label">XPDR</span>
+                <span class="gauge-value font-mono">{{ activeSquawk || '7000' }}</span>
+              </div>
+              <div class="gauge alt">
+                <span class="gauge-label">ALTITUDE</span>
+                <span class="gauge-value font-mono">{{ activeAltitude !== undefined ? (activeAltitude | number) + ' FT' : '---- FT' }}</span>
+              </div>
+              <div class="gauge phase">
+                <span class="gauge-label">FLIGHT PHASE</span>
+                <span class="phase-badge" [ngClass]="activePhase || 'ground'">{{ activePhaseText || 'GROUND' }}</span>
+              </div>
             </div>
-          } @else {
-            @if (currentStep) {
-              <!-- Current Step is PILOT MESSAGE (Needs to radio first) -->
-              @if (currentStep.type === 'message' && currentStep.role === 'pilot') {
-                <div class="pilot-action-card" @fade>
-                  <div class="prompt-container">
-                    <span class="prompt-badge">Du bist dran!</span>
-                    <p class="prompt-instruction">
-                      {{ language === 'de' ? currentStep.promptDe : currentStep.promptEn }}
-                    </p>
-                  </div>
+            
+            <!-- Map DIV -->
+            <div id="vfr-map-container" class="vfr-map"></div>
+          </div>
 
-                  @if (!isCurrentStepRevealed) {
-                    <button class="btn-primary btn-reveal" (click)="revealPilotSolution()">
-                      🎤 Funken & Lösung anzeigen
-                    </button>
-                  } @else {
-                    <div class="solution-revealed-box" @fade>
-                      <span class="solution-label">Deine Übermittlung (Gesagt):</span>
-                      <p class="solution-text font-bold">
-                        {{ language === 'de' ? currentStep.textDe : currentStep.textEn }}
-                      </p>
+          <!-- Radio Communication Column (Right) -->
+          <div class="radio-column">
+            <!-- Scrollable Conversation History -->
+            <div class="conversation-history" #historyContainer>
+              <div class="scroll-content">
+                @for (step of revealedSteps; track $index) {
+                  <!-- Message Turn -->
+                  @if (step.type === 'message') {
+                    <div class="chat-bubble-container" [class.pilot]="step.role === 'pilot'" [class.tower]="step.role === 'tower'">
+                      <div class="chat-bubble">
+                        <span class="sender-label">
+                          {{ step.role === 'pilot' ? 'Pilot (D-EPAH)' : 'Tower / Controller' }}
+                        </span>
+                        <p class="bubble-text">
+                          {{ language === 'de' ? step.textDe : step.textEn }}
+                        </p>
+                      </div>
                     </div>
-                    <button class="btn-primary btn-next" (click)="nextStep()">
-                      Weiter →
-                    </button>
                   }
-                </div>
-              }
 
-              <!-- Current Step is INSTRUCTION (Physical action) -->
-              @if (currentStep.type === 'instruction') {
-                <div class="instruction-action-card" @fade>
-                  <div class="instruction-prompt">
-                    <span class="instruction-badge">Aktion erforderlich</span>
-                    <p class="instruction-prompt-text">
-                      {{ language === 'de' ? currentStep.textDe : currentStep.textEn }}
-                    </p>
+                  <!-- Instruction callout -->
+                  @if (step.type === 'instruction') {
+                    <div class="instruction-callout">
+                      <div class="instruction-box">
+                        <span class="hand-icon">👉</span>
+                        <span class="instruction-text">
+                          {{ language === 'de' ? step.textDe : step.textEn }}
+                        </span>
+                      </div>
+                    </div>
+                  }
+                }
+
+                <!-- Simulation Finished State inside history -->
+                @if (isFinished) {
+                  <div class="finished-callout" @fade>
+                    <div class="finished-box">
+                      <span class="check-icon">🏆</span>
+                      <h3>Simulation erfolgreich beendet!</h3>
+                      <p>Du hast das Sprechfunkverfahren für {{ selectedSimulation.title }} vollständig absolviert.</p>
+                    </div>
                   </div>
-                  <button class="btn-primary btn-instruction-confirm" (click)="nextStep()">
-                    Ausgeführt / Weiter →
-                  </button>
+                }
+              </div>
+            </div>
+
+            <!-- Interactive Control Panel at Bottom -->
+            <footer class="control-panel">
+              @if (isFinished) {
+                <div class="action-buttons-finished">
+                  <button class="btn-primary" (click)="resetSimulation()">Nochmal starten</button>
+                  <button class="btn-secondary" (click)="exitSimulation()">Zurück zur Übersicht</button>
                 </div>
+              } @else {
+                @if (currentStep) {
+                  <!-- Current Step is PILOT MESSAGE (Needs to radio first) -->
+                  @if (currentStep.type === 'message' && currentStep.role === 'pilot') {
+                    <div class="pilot-action-card" @fade>
+                      <div class="prompt-container">
+                        <span class="prompt-badge">Du bist dran!</span>
+                        <p class="prompt-instruction">
+                          {{ language === 'de' ? currentStep.promptDe : currentStep.promptEn }}
+                        </p>
+                      </div>
+
+                      @if (!isCurrentStepRevealed) {
+                        <button class="btn-primary btn-reveal" (click)="revealPilotSolution()">
+                          🎤 Funken & Lösung anzeigen
+                        </button>
+                      } @else {
+                        <div class="solution-revealed-box" @fade>
+                          <span class="solution-label">Deine Übermittlung (Gesagt):</span>
+                          <p class="solution-text font-bold">
+                            {{ language === 'de' ? currentStep.textDe : currentStep.textEn }}
+                          </p>
+                        </div>
+                        <button class="btn-primary btn-next" (click)="nextStep()">
+                          Weiter →
+                        </button>
+                      }
+                    </div>
+                  }
+
+                  <!-- Current Step is INSTRUCTION (Physical action) -->
+                  @if (currentStep.type === 'instruction') {
+                    <div class="instruction-action-card" @fade>
+                      <div class="instruction-prompt">
+                        <span class="instruction-badge">Aktion erforderlich</span>
+                        <p class="instruction-prompt-text">
+                          {{ language === 'de' ? currentStep.textDe : currentStep.textEn }}
+                        </p>
+                      </div>
+                      <button class="btn-primary btn-instruction-confirm" (click)="nextStep()">
+                        Ausgeführt / Weiter →
+                      </button>
+                    </div>
+                  }
+                }
               }
-            }
-          }
-        </footer>
+            </footer>
+          </div>
+
+        </div>
       </div>
     }
   }
