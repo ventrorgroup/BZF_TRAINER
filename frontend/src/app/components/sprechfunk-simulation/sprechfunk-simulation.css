@@ -534,6 +534,7 @@
 }
 
 /* Split Screen Layout & Map Columns */
+/* Split Screen Layout & Map Columns */
 .simulator-main-content {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -546,6 +547,73 @@
   flex-direction: column;
   border-right: 1px solid var(--glass-border);
   position: relative;
+  background: #111517;
+}
+
+.chart-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1b2123;
+  border-bottom: 2px solid #0a0e10;
+  padding: 6px 12px;
+  gap: 8px;
+  z-index: 5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.chart-type-tabs, .airport-selector-tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-tab {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #7d8e95;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.btn-tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.btn-tab.active {
+  background: var(--primary);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+.btn-airport {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+}
+
+.btn-airport:hover {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.btn-airport.active {
+  background: #059669;
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4);
+}
+
+.map-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
 }
 
 .vfr-map {
@@ -553,6 +621,127 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  background-color: #faf6ee !important; /* Authentic premium paper cream */
+  background-image: radial-gradient(rgba(120, 110, 90, 0.15) 1.5px, transparent 1.5px),
+                    radial-gradient(rgba(120, 110, 90, 0.15) 1.5px, transparent 1.5px) !important;
+  background-size: 24px 24px !important;
+  background-position: 0 0, 12px 12px !important;
+}
+
+/* Frequencies Box Overlay */
+.frequencies-box {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: 165px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 12px;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  pointer-events: none; /* Pass clicks to map */
+}
+
+.freq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.freq-icao {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #60a5fa;
+  letter-spacing: 0.05em;
+}
+
+.freq-name {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 95px;
+}
+
+.freq-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.freq-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+}
+
+.freq-label {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.freq-val {
+  font-family: monospace;
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+/* Compass Rose HUD Overlay */
+.compass-rose-hud {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 54px;
+  height: 54px;
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.compass-svg {
+  width: 85%;
+  height: 85%;
+}
+
+.compass-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 2px;
+}
+
+.compass-line {
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 1px;
+  stroke-dasharray: 2, 2;
+}
+
+.needle-north {
+  fill: #ef4444;
+}
+
+.needle-south {
+  fill: #cbd5e1;
+}
+
+.compass-text {
+  fill: #cbd5e1;
+  font-size: 11px;
+  font-weight: 800;
+  text-anchor: middle;
 }
 
 .radio-column {
@@ -704,7 +893,7 @@
 @media (max-width: 900px) {
   .simulator-main-content {
     grid-template-columns: 1fr;
-    grid-template-rows: 280px 1fr;
+    grid-template-rows: 320px 1fr;
   }
   
   .map-column {
@@ -717,4 +906,5 @@
     max-height: none;
   }
 }
+
 

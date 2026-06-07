@@ -87,9 +87,79 @@
                 <span class="phase-badge" [ngClass]="activePhase || 'ground'">{{ activePhaseText || 'GROUND' }}</span>
               </div>
             </div>
+
+            <!-- EFB Chart Selector Controls -->
+            <div class="chart-controls-bar">
+              <!-- Chart Type Selectors -->
+              <div class="chart-type-tabs">
+                <button class="btn-tab" [class.active]="activeChartType === 'gnd'" (click)="switchChartType('gnd')">
+                  ✈️ Flugplatzkarte (GND)
+                </button>
+                <button class="btn-tab" [class.active]="activeChartType === 'vfr'" (click)="switchChartType('vfr')">
+                  🗺️ Sichtanflug (VFR)
+                </button>
+              </div>
+
+              <!-- Airport Selectors (Only shown if multiple airports exist) -->
+              <div class="airport-selector-tabs" *ngIf="availableAirports.length > 1">
+                <button *ngFor="let ap of availableAirports" 
+                        class="btn-tab btn-airport" 
+                        [class.active]="activeAirport === ap" 
+                        (click)="switchAirport(ap)">
+                  {{ ap }}
+                </button>
+              </div>
+            </div>
             
-            <!-- Map DIV -->
-            <div id="vfr-map-container" class="vfr-map"></div>
+            <div class="map-wrapper">
+              <!-- Map DIV -->
+              <div id="vfr-map-container" class="vfr-map"></div>
+
+              <!-- Frequencies Overlay Box -->
+              <div class="frequencies-box glass-card" *ngIf="airportFrequencies[activeAirport]">
+                <div class="freq-header">
+                  <span class="freq-icao">{{ activeAirport }}</span>
+                  <span class="freq-name">{{ airportFrequencies[activeAirport].name }}</span>
+                </div>
+                <div class="freq-body">
+                  <div class="freq-row">
+                    <span class="freq-label">ELEV:</span>
+                    <span class="freq-val">{{ airportFrequencies[activeAirport].elev }}</span>
+                  </div>
+                  <div class="freq-row" *ngIf="airportFrequencies[activeAirport].atis !== '---.---'">
+                    <span class="freq-label">ATIS:</span>
+                    <span class="freq-val">{{ airportFrequencies[activeAirport].atis }}</span>
+                  </div>
+                  <div class="freq-row" *ngIf="airportFrequencies[activeAirport].del !== '---.---'">
+                    <span class="freq-label">DEL:</span>
+                    <span class="freq-val">{{ airportFrequencies[activeAirport].del }}</span>
+                  </div>
+                  <div class="freq-row" *ngIf="airportFrequencies[activeAirport].gnd !== '---.---'">
+                    <span class="freq-label">GND:</span>
+                    <span class="freq-val">{{ airportFrequencies[activeAirport].gnd }}</span>
+                  </div>
+                  <div class="freq-row" *ngIf="airportFrequencies[activeAirport].twr !== '---.---'">
+                    <span class="freq-label">TWR:</span>
+                    <span class="freq-val">{{ airportFrequencies[activeAirport].twr }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Compass Rose HUD Overlay -->
+              <div class="compass-rose-hud">
+                <svg viewBox="0 0 100 100" class="compass-svg">
+                  <circle cx="50" cy="50" r="45" class="compass-ring"/>
+                  <line x1="50" y1="5" x2="50" y2="95" class="compass-line"/>
+                  <line x1="5" y1="50" x2="95" y2="50" class="compass-line"/>
+                  <polygon points="50,15 45,50 55,50" class="needle-north"/>
+                  <polygon points="50,85 45,50 55,50" class="needle-south"/>
+                  <text x="50" y="24" class="compass-text">N</text>
+                  <text x="50" y="82" class="compass-text">S</text>
+                  <text x="20" y="54" class="compass-text">W</text>
+                  <text x="80" y="54" class="compass-text">O</text>
+                </svg>
+              </div>
+            </div>
           </div>
 
           <!-- Radio Communication Column (Right) -->
