@@ -196,27 +196,20 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
   activeChartType: 'vfr' | 'gnd' = 'gnd';
   availableAirports: string[] = ['EDDK', 'EDDH'];
   private chartOverlay: any = null;
-  private ctrCircles: any[] = [];
-  private waypointMarkers: any[] = [];
-  private airportMarkers: any[] = [];
-  private runwayLines: any[] = [];
 
-  airportFrequencies: Record<string, { elev: string; atis: string; twr: string; gnd: string; del: string; name: string }> = {
-    "EDDK": { elev: "302 FT", atis: "132.130", twr: "124.975", gnd: "121.730", del: "121.855", name: "Köln-Bonn" },
-    "EDDH": { elev: "53 FT", atis: "123.130", twr: "126.850", gnd: "121.800", del: "121.980", name: "Hamburg" },
-    "EDDP": { elev: "479 FT", atis: "123.780", twr: "121.155", gnd: "121.850", del: "121.655", name: "Leipzig/Halle" },
-    "EDDN": { elev: "1046 FT", atis: "123.080", twr: "118.300", gnd: "118.300", del: "---.---", name: "Nürnberg" },
-    "EDDV": { elev: "183 FT", atis: "132.130", twr: "120.005", gnd: "121.955", del: "121.705", name: "Hannover" },
-    "EDVE": { elev: "295 FT", atis: "---.---", twr: "122.605", gnd: "---.---", del: "---.---", name: "Braunschweig" },
-    "EDDS": { elev: "1181 FT", atis: "126.130", twr: "118.805", gnd: "118.600", del: "122.380", name: "Stuttgart" },
-    "EDDB": { elev: "157 FT", atis: "122.855", twr: "120.030", gnd: "121.605", del: "120.130", name: "Berlin Brandenburg" }
+  airportFrequencies: Record<string, { elev: string; name: string }> = {
+    "EDDK": { elev: "302 FT", name: "Köln-Bonn" },
+    "EDDH": { elev: "53 FT", name: "Hamburg" },
+    "EDDP": { elev: "479 FT", name: "Leipzig/Halle" },
+    "EDDN": { elev: "1046 FT", name: "Nürnberg" },
+    "EDDV": { elev: "183 FT", name: "Hannover" },
+    "EDVE": { elev: "295 FT", name: "Braunschweig" },
+    "EDDS": { elev: "1181 FT", name: "Stuttgart" },
+    "EDDB": { elev: "157 FT", name: "Berlin Brandenburg" }
   };
 
   // Leaflet Map variables
   private map: any = null;
-  private planeMarker: any = null;
-  private pathLine: any = null;
-  private flightCoordinates: [number, number][] = [];
 
   constructor(private bzfService: BzfService) {}
 
@@ -279,7 +272,6 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
     this.currentStepIndex = 0;
     this.revealedSteps = [];
     this.isCurrentStepRevealed = false;
-    this.flightCoordinates = [];
     
     if (this.selectedSimulation && this.selectedSimulation.steps.length > 0) {
       const firstStep = this.selectedSimulation.steps[0];
@@ -384,89 +376,8 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
       attributionControl: false
     }).setView([center.lat, center.lng], 12);
 
-    this.ctrCircles = [];
-    this.waypointMarkers = [];
-    this.airportMarkers = [];
-    this.runwayLines = [];
-
-    // Draw CTR, runways, and waypoints for all available airports, but save references
-    this.availableAirports.forEach(code => {
-      const meta = AIRPORT_METADATA[code];
-      if (!meta) return;
-
-      // Draw dashed red Control Zone (CTR)
-      const ctrRadiusMeters = meta.ctrRadiusNm * 1852;
-      const ctr = L.circle([meta.lat, meta.lng], {
-        radius: ctrRadiusMeters,
-        color: '#ef4444',
-        weight: 2,
-        dashArray: '5, 8',
-        fillColor: '#ef4444',
-        fillOpacity: 0.03
-      }).bindTooltip(`CTR ${meta.name} (Airspace D)`, { sticky: true });
-      this.ctrCircles.push(ctr);
-
-      // Draw Runways (Blue lines)
-      meta.runways.forEach(rwy => {
-        const line = L.polyline([rwy.start, rwy.end], {
-          color: '#1e40af',
-          weight: 4,
-          opacity: 0.6
-        }).bindTooltip(`Rwy ${rwy.label}`, { permanent: false });
-        this.runwayLines.push(line);
-      });
-
-      // Draw VFR Reporting Points (Filled orange circles with labels)
-      meta.waypoints.forEach(wp => {
-        const wpMarker = L.circleMarker([wp.lat, wp.lng], {
-          radius: 7,
-          color: '#fbbf24',
-          weight: 2,
-          fillColor: '#2563eb',
-          fillOpacity: 0.8
-        }).bindTooltip(wp.label, { permanent: true, direction: 'top', className: 'vfr-wp-label' });
-        this.waypointMarkers.push(wpMarker);
-      });
-      
-      // Draw Airport Marker
-      const apMarker = L.circleMarker([meta.lat, meta.lng], {
-        radius: 5,
-        color: '#1e3a8a',
-        fillColor: '#60a5fa',
-        fillOpacity: 1
-      }).bindTooltip(meta.name, { permanent: false });
-      this.airportMarkers.push(apMarker);
-    });
-
-    // Add elements to the map initially
-    this.ctrCircles.forEach(c => c.addTo(this.map));
-    this.runwayLines.forEach(r => r.addTo(this.map));
-    this.waypointMarkers.forEach(w => w.addTo(this.map));
-    this.airportMarkers.forEach(a => a.addTo(this.map));
-
     // Load active image chart overlay
     this.updateChart();
-
-    // Draw Aircraft Marker (Pulsing blue icon)
-    const pulsingPlaneIcon = L.divIcon({
-      className: 'pulsing-plane-icon-container',
-      html: '<div class="pulsing-core"></div><div class="pulsing-ring"></div>',
-      iconSize: [24, 24],
-      iconAnchor: [12, 12]
-    });
-
-    const pos = this.selectedSimulation?.steps[this.currentStepIndex]?.mapPosition || center;
-    this.planeMarker = L.marker([pos.lat, pos.lng], { icon: pulsingPlaneIcon }).addTo(this.map);
-
-    // Initialize flight path polyline
-    this.pathLine = L.polyline([], {
-      color: '#3b82f6',
-      weight: 3,
-      dashArray: '5, 5',
-      opacity: 0.8
-    }).addTo(this.map);
-
-    this.updateOverlayVisibility();
   }
 
   private cleanupMap() {
@@ -474,13 +385,7 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
       this.map.remove();
       this.map = null;
     }
-    this.planeMarker = null;
-    this.pathLine = null;
     this.chartOverlay = null;
-    this.ctrCircles = [];
-    this.waypointMarkers = [];
-    this.airportMarkers = [];
-    this.runwayLines = [];
   }
 
   getChartUrl(airport: string, type: 'vfr' | 'gnd'): string {
@@ -546,16 +451,14 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
       alt: `${this.activeAirport} ${this.activeChartType === 'vfr' ? 'Sichtanflugkarte' : 'Flugplatzkarte'}`
     }).addTo(this.map);
 
-    if (this.activeChartType === 'gnd') {
-      const meta = AIRPORT_METADATA[this.activeAirport];
-      if (meta) {
+    const meta = AIRPORT_METADATA[this.activeAirport];
+    if (meta) {
+      if (this.activeChartType === 'gnd') {
         this.map.setView([meta.lat, meta.lng], 14.5, { animate: false });
+      } else {
+        this.map.fitBounds(bounds, { animate: false });
       }
-    } else {
-      this.map.fitBounds(bounds, { animate: false });
     }
-    
-    this.updateOverlayVisibility();
   }
 
   switchChartType(type: 'vfr' | 'gnd') {
@@ -574,24 +477,6 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
     }
     
     this.updateChart();
-  }
-
-  updateOverlayVisibility() {
-    if (!this.map) return;
-
-    if (this.activeChartType === 'gnd') {
-      // Hide VFR overlays on GND chart
-      this.ctrCircles.forEach(c => this.map.removeLayer(c));
-      this.waypointMarkers.forEach(w => this.map.removeLayer(w));
-      this.airportMarkers.forEach(a => this.map.removeLayer(a));
-      this.runwayLines.forEach(r => r.addTo(this.map));
-    } else {
-      // Show VFR overlays on VFR chart
-      this.ctrCircles.forEach(c => c.addTo(this.map));
-      this.waypointMarkers.forEach(w => w.addTo(this.map));
-      this.airportMarkers.forEach(a => a.addTo(this.map));
-      this.runwayLines.forEach(r => r.addTo(this.map));
-    }
   }
 
   private updateMapAndCockpit() {
@@ -655,36 +540,6 @@ export class SprechfunkSimulationComponent implements OnInit, OnDestroy {
     // Update the map image overlay if airport or chart type changed
     if (airportChanged || chartTypeChanged) {
       this.updateChart();
-    }
-
-    // 2. Update Map Position / Aircraft Marker
-    if (activeStep.mapPosition && this.map && this.planeMarker) {
-      const pos = activeStep.mapPosition;
-      
-      // Move airplane marker
-      this.planeMarker.setLatLng([pos.lat, pos.lng]);
-      this.planeMarker.bindTooltip(`D-EPAH (${pos.label})`, { permanent: false });
-
-      // Add coordinate to track if it's new
-      const lastCoord = this.flightCoordinates[this.flightCoordinates.length - 1];
-      if (!lastCoord || lastCoord[0] !== pos.lat || lastCoord[1] !== pos.lng) {
-        this.flightCoordinates.push([pos.lat, pos.lng]);
-        this.pathLine.setLatLngs(this.flightCoordinates);
-      }
-
-      // Dynamic Zooming/Panning
-      if (this.activeChartType === 'gnd') {
-        const meta = AIRPORT_METADATA[this.activeAirport];
-        if (meta) {
-          this.map.setView([meta.lat, meta.lng], 14.5, { animate: true, duration: 0.5 });
-        }
-      } else {
-        let zoom = 11;
-        if (this.activePhase === 'cruise') {
-          zoom = 10;
-        }
-        this.map.setView([pos.lat, pos.lng], zoom, { animate: true, duration: 0.5 });
-      }
     }
   }
 
