@@ -7,6 +7,7 @@ import { SequentialLearningComponent } from './components/sequential-learning/se
 import { DifficultQuestionsComponent } from './components/difficult-questions/difficult-questions';
 import { EnglishTrainingComponent } from './components/english-training/english-training';
 import { SprechfunkSimulationComponent } from './components/sprechfunk-simulation/sprechfunk-simulation';
+import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -18,5 +19,7 @@ export const routes: Routes = [
   { path: 'difficult', component: DifficultQuestionsComponent },
   { path: 'english', component: EnglishTrainingComponent },
   { path: 'sprechfunk', component: SprechfunkSimulationComponent },
+  { path: 'admin', component: AdminComponent },
 ];
+
 

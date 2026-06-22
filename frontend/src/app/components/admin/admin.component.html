@@ -1,0 +1,137 @@
+<div class="admin-container">
+  <!-- Login State -->
+  <div *ngIf="!authService.isAdminLoggedIn()" class="glass-card login-card">
+    <div class="card-header">
+      <h2 class="gradient-text">Admin-Bereich</h2>
+      <p class="subtitle">Bitte gib das statische Admin-Passwort ein, um Accounts zu verwalten.</p>
+    </div>
+    
+    <form (submit)="login()" class="login-form">
+      <div class="form-group">
+        <label for="password">Admin-Passwort</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          [(ngModel)]="adminPassword" 
+          placeholder="••••••••" 
+          required 
+          autocomplete="current-password"
+        />
+      </div>
+
+      <div *ngIf="errorMessage" class="alert-box error">
+        <span>⚠️ {{ errorMessage }}</span>
+      </div>
+
+      <button type="submit" [disabled]="isLoading" class="btn-primary">
+        {{ isLoading ? 'Lade...' : 'Anmelden' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Authenticated Admin State -->
+  <div *ngIf="authService.isAdminLoggedIn()" class="admin-dashboard">
+    <div class="dashboard-header glass-card">
+      <div>
+        <h1 class="gradient-text">Account-Management</h1>
+        <p class="subtitle">Erstelle und verwalte die Lernprofile deiner Schüler.</p>
+      </div>
+      <button (click)="logout()" class="btn-secondary">Admin Abmelden</button>
+    </div>
+
+    <!-- Alert Boxen -->
+    <div *ngIf="errorMessage" class="alert-box error glass-card">
+      <span>⚠️ {{ errorMessage }}</span>
+    </div>
+    <div *ngIf="successMessage" class="alert-box success glass-card">
+      <span>✅ {{ successMessage }}</span>
+    </div>
+
+    <div class="dashboard-content">
+      <!-- Left side: Create Account -->
+      <div class="glass-card create-card">
+        <h3>Neuen Account anlegen</h3>
+        <p class="section-desc">Erstellt ein neues, separates Profil mit einer eindeutigen GUID.</p>
+        
+        <form (submit)="createAccount()" class="create-form">
+          <div class="form-group">
+            <label for="studentName">Name des Schülers</label>
+            <input 
+              type="text" 
+              id="studentName" 
+              name="studentName" 
+              [(ngModel)]="newAccountName" 
+              placeholder="z.B. Max Mustermann" 
+              required
+            />
+          </div>
+          <button type="submit" [disabled]="isLoading" class="btn-primary">
+            Account anlegen
+          </button>
+        </form>
+      </div>
+
+      <!-- Right side: Account List -->
+      <div class="glass-card list-card">
+        <h3>Registrierte Profile</h3>
+        <p class="section-desc">Alle hier gelisteten Profile arbeiten unabhängig voneinander.</p>
+
+        <div class="table-container">
+          <table class="accounts-table">
+            <thead>
+              <tr>
+                <th>Schüler/Profil</th>
+                <th>Fortschritt</th>
+                <th>GUID</th>
+                <th>Aktionen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let acc of accounts" [class.default-row]="acc.guid === 'default-account-guid'">
+                <td>
+                  <div class="profile-cell">
+                    <span class="name">{{ acc.name }}</span>
+                    <span *ngIf="acc.guid === 'default-account-guid'" class="default-badge">Standard</span>
+                  </div>
+                  <span class="created-at">Erstellt: {{ acc.createdAt | date:'dd.MM.yyyy HH:mm' }}</span>
+                </td>
+                <td>
+                  <div class="progress-details">
+                    <span>Questions: <strong>{{ acc._count.userStats || 0 }}</strong></span>
+                    <span>Exams: <strong>{{ acc._count.examResults || 0 }}</strong></span>
+                  </div>
+                </td>
+                <td class="guid-cell">
+                  <code>{{ acc.guid === 'default-account-guid' ? 'Default' : acc.guid }}</code>
+                </td>
+                <td class="actions-cell">
+                  <button (click)="copyShareLink(acc)" class="action-btn copy" title="Link für Schüler kopieren">
+                    🔗 Link
+                  </button>
+                  <button (click)="switchToAccount(acc)" class="action-btn switch" title="In dieses Profil einloggen">
+                    Lernen
+                  </button>
+                  <button 
+                    *ngIf="acc.guid !== 'default-account-guid'" 
+                    (click)="deleteAccount(acc)" 
+                    class="action-btn delete" 
+                    title="Account löschen"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="accounts.length === 0 && !isLoading">
+                <td colspan="4" class="empty-cell">Keine Accounts gefunden.</td>
+              </tr>
+              <tr *ngIf="isLoading && accounts.length === 0">
+                <td colspan="4" class="empty-cell">Lade Konten...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

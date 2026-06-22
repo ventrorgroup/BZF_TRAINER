@@ -16,8 +16,21 @@ export class AppComponent {
 
   constructor(public authService: AuthService) {}
 
+  switchAccount(): void {
+    const current = this.authService.currentAccount();
+    const currentGuid = current?.guid === 'default-account-guid' ? '' : current?.guid;
+    const guid = prompt(
+      'Bitte gib deine persönliche Account-GUID ein (oder leer lassen für Standard-Account):',
+      currentGuid
+    );
+    if (guid !== null) {
+      this.authService.switchAccount(guid.trim() || null);
+    }
+  }
+
   logout(): void {
     this.authService.logout();
     this.navOpen = false;
   }
 }
+

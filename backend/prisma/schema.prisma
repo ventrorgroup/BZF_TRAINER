@@ -14,7 +14,7 @@ model Question {
   category        String   // BZF1, BZF2, Both
   imageUrl        String?
   answers         Answer[]
-  stats           UserStat?
+  stats           UserStat[]
   examQuestions   ExamQuestion[]
 }
 
@@ -26,13 +26,27 @@ model Answer {
   question    Question @relation(fields: [questionId], references: [id])
 }
 
+model Account {
+  id        Int      @id @default(autoincrement())
+  guid      String   @unique @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  
+  userStats   UserStat[]
+  textStats   TextStat[]
+  examResults ExamResult[]
+}
+
 model UserStat {
   id          Int      @id @default(autoincrement())
-  questionId  Int      @unique
+  accountId   Int?
+  questionId  Int
   correct     Int      @default(0)
   incorrect   Int      @default(0)
   isDifficult Boolean  @default(false)
   question    Question @relation(fields: [questionId], references: [id])
+  account     Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  @@unique([accountId, questionId])
 }
 
 model Exam {
@@ -52,10 +66,12 @@ model ExamQuestion {
 
 model ExamResult {
   id        Int      @id @default(autoincrement())
+  accountId Int?
   examId    Int
   date      DateTime @default(now())
   score     Int
   exam      Exam     @relation(fields: [examId], references: [id])
+  account   Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }
 
 model BzfText {
@@ -63,12 +79,13 @@ model BzfText {
   number    String   @unique
   textEn    String
   textDe    String
-  stats     TextStat?
+  stats     TextStat[]
 }
 
 model TextStat {
   id          Int      @id @default(autoincrement())
-  textId      Int      @unique
+  accountId   Int?
+  textId      Int
   difficulty  String   @default("unknown") // easy, medium, hard
   isFavorite  Boolean  @default(false)
   viewCount   Int      @default(0)
@@ -76,5 +93,8 @@ model TextStat {
   mediumCount Int      @default(0)
   hardCount   Int      @default(0)
   bzfText     BzfText  @relation(fields: [textId], references: [id])
+  account     Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  @@unique([accountId, textId])
 }
+
 

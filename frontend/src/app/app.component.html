@@ -17,6 +17,13 @@
         <a routerLink="/exams" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Prüfungen</a>
         <a routerLink="/unsure" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Unsicher</a>
         <a routerLink="/difficult" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Schwer</a>
+        <a routerLink="/admin" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Admin</a>
+        @if (authService.currentAccount()) {
+          <div class="active-profile-badge">
+            <span class="profile-name" title="Aktives Lernprofil">👤 {{ authService.currentAccount()?.name }}</span>
+            <button class="btn-switch-profile" (click)="switchAccount()" title="Profil wechseln">🔄</button>
+          </div>
+        }
         <button class="nav-item logout-nav-btn" (click)="logout()">Abmelden</button>
       </div>
     </nav>
