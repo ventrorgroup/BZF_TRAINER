@@ -11,7 +11,7 @@ services:
     ports:
       - "5433:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bzfuser} -d ${POSTGRES_DB:-bzftrainer}"]
+      test: ["CMD-SHELL", "pg_isready -U bzfuser -d bzftrainer"]
       interval: 5s
       timeout: 5s
       retries: 5
