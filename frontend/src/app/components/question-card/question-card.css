@@ -39,12 +39,30 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.option::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.06), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
 }
 
 .option:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateX(4px);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 16px -4px rgba(99, 102, 241, 0.15);
+}
+
+.option:hover::before {
+  transform: translateX(100%);
 }
 
 .option.selected {
@@ -55,11 +73,30 @@
 .option.correct {
   border-color: #22c55e;
   background: rgba(34, 197, 94, 0.1);
+  box-shadow: 0 0 20px -4px rgba(34, 197, 94, 0.25);
+  animation: correctPulse 0.6s ease-out;
 }
 
 .option.incorrect {
   border-color: #ef4444;
   background: rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 20px -4px rgba(239, 68, 68, 0.25);
+  animation: incorrectShake 0.5s ease-in-out;
+}
+
+@keyframes correctPulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 24px 4px rgba(34, 197, 94, 0.25); }
+  100% { box-shadow: 0 0 20px -4px rgba(34, 197, 94, 0.25); }
+}
+
+@keyframes incorrectShake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-6px); }
+  30% { transform: translateX(5px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
 }
 
 .option-indicator {
@@ -69,11 +106,20 @@
   border: 2px solid #64748b;
   margin-right: 1.25rem;
   flex-shrink: 0;
+  transition: all 0.25s ease;
 }
 
 .option.selected .option-indicator { border-color: var(--primary); background: var(--primary); }
-.option.correct .option-indicator { border-color: #22c55e; background: #22c55e; }
-.option.incorrect .option-indicator { border-color: #ef4444; background: #ef4444; }
+.option.correct .option-indicator {
+  border-color: #22c55e;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+.option.incorrect .option-indicator {
+  border-color: #ef4444;
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
 
 .q-header {
   display: flex;
@@ -100,6 +146,22 @@
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.q-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: badgeShimmer 3s ease-in-out infinite;
+}
+
+@keyframes badgeShimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
 }
 
 .q-category-tag {
@@ -161,10 +223,30 @@
   border-radius: 8px;
   text-align: center;
   font-weight: 700;
+  animation: feedbackSlideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
-.feedback-msg.success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
-.feedback-msg.error { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+@keyframes feedbackSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback-msg.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.15);
+}
+.feedback-msg.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
 
 /* ── Tablet ── */
 @media (max-width: 768px) {
@@ -210,5 +292,24 @@
   .btn-flag-minimal {
     padding: 0.4rem 0.75rem;
     font-size: 0.85rem;
+  }
+}
+
+/* ── Ultra-narrow (375px) ── */
+@media (max-width: 375px) {
+  .q-card {
+    padding: 0.75rem;
+  }
+  .q-text {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  .option {
+    padding: 0.75rem;
+    border-radius: 10px;
+  }
+  .q-badge {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
   }
 }

@@ -2,31 +2,56 @@
   <div class="app-container">
     <nav class="glass-nav">
       <div class="nav-header">
-        <div class="logo">
+        <a routerLink="/dashboard" class="logo">
+          <span class="logo-icon">✈️</span>
           <span class="gradient-text">BZF Trainer Pro</span>
-        </div>
-        <button class="hamburger" (click)="navOpen = !navOpen" aria-label="Menü öffnen">
+        </a>
+        <button class="hamburger" [class.active]="navOpen" (click)="navOpen = !navOpen" aria-label="Menü öffnen">
           <span></span><span></span><span></span>
         </button>
       </div>
       <div class="nav-links" [class.open]="navOpen">
-        <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Dashboard</a>
-        <a routerLink="/learn" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Lern-Modus</a>
-        <a routerLink="/english" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Englisch</a>
-        <a routerLink="/sprechfunk" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Sprechfunk</a>
-        <a routerLink="/exams" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Prüfungen</a>
-        <a routerLink="/unsure" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Unsicher</a>
-        <a routerLink="/difficult" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Schwer</a>
-        <a routerLink="/admin" routerLinkActive="active" class="nav-item" (click)="navOpen = false">Admin</a>
-        @if (authService.currentAccount()) {
-          <div class="active-profile-badge">
-            <span class="profile-name" title="Aktives Lernprofil">👤 {{ authService.currentAccount()?.name }}</span>
-            <button class="btn-switch-profile" (click)="switchAccount()" title="Profil wechseln">🔄</button>
-          </div>
-        }
-        <button class="nav-item logout-nav-btn" (click)="logout()">Abmelden</button>
+        <div class="nav-links-main">
+          <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">📊</span>Dashboard
+          </a>
+          <a routerLink="/learn" routerLinkActive="active" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">📚</span>Lernen
+          </a>
+          <a routerLink="/english" routerLinkActive="active" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">🇬🇧</span>Englisch
+          </a>
+          <a routerLink="/sprechfunk" routerLinkActive="active" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">🎙️</span>Sprechfunk
+          </a>
+          <a routerLink="/exams" routerLinkActive="active" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">📝</span>Prüfungen
+          </a>
+          <a routerLink="/unsure" routerLinkActive="active" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">🔖</span>Unsicher
+          </a>
+          <a routerLink="/difficult" routerLinkActive="active" class="nav-item" (click)="navOpen = false">
+            <span class="nav-icon">⚡</span>Schwer
+          </a>
+        </div>
+        <div class="nav-links-end">
+          @if (authService.currentAccount()) {
+            <div class="active-profile-badge">
+              <div class="avatar-circle">{{ authService.currentAccount()?.name?.charAt(0)?.toUpperCase() }}</div>
+              <span class="profile-name" title="Aktives Lernprofil">{{ authService.currentAccount()?.name }}</span>
+              <button class="btn-switch-profile" (click)="switchAccount()" title="Profil wechseln">🔄</button>
+            </div>
+          }
+          <a routerLink="/admin" routerLinkActive="active" class="nav-item nav-item-admin" (click)="navOpen = false">
+            <span class="nav-icon">⚙️</span>Admin
+          </a>
+          <button class="logout-btn" (click)="logout()">
+            <span class="nav-icon">🚪</span>Abmelden
+          </button>
+        </div>
       </div>
     </nav>
+    <div class="nav-backdrop" [class.visible]="navOpen" (click)="navOpen = false"></div>
 
     <main class="content-area">
       <router-outlet></router-outlet>
