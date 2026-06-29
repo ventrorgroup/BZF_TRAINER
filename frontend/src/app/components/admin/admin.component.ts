@@ -86,7 +86,7 @@ export class AdminComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.errorMessage = 'Konten konnten nicht geladen werden.';
+        this.errorMessage = err.error?.details || err.error?.error || 'Konten konnten nicht geladen werden.';
       }
     });
   }
@@ -110,7 +110,7 @@ export class AdminComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading = false;
-        this.errorMessage = err.error?.error || 'Konto konnte nicht erstellt werden.';
+        this.errorMessage = err.error?.details || err.error?.error || 'Konto konnte nicht erstellt werden.';
       }
     });
   }
