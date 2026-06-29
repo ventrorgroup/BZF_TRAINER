@@ -688,7 +688,7 @@ async function runMigrationsAndSeed(retries = 15, delay = 5000) {
         try {
             console.log(`Running database migrations (attempt ${i + 1}/${retries})...`);
             await new Promise((resolve, reject) => {
-                exec('npx --no-install prisma db push', (error, stdout, stderr) => {
+                exec('npx --no-install prisma db push --accept-data-loss', (error, stdout, stderr) => {
                     if (error) {
                         reject(new Error(stderr || error.message));
                     } else {
