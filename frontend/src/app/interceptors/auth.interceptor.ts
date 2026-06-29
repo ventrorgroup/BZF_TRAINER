@@ -33,9 +33,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       // If unauthorized (401), automatically log out (except for login endpoints)
       if (error.status === 401 && !req.url.includes('/api/auth/login') && !req.url.includes('/api/admin/auth')) {
         if (req.url.includes('/api/admin')) {
-          if (isBrowser) {
-            localStorage.removeItem('bzf_admin_password');
-          }
+          authService.logoutAdmin();
         } else {
           authService.logout();
         }
