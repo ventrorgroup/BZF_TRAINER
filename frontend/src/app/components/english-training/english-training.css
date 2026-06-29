@@ -29,6 +29,7 @@
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
     color: white;
+    transition: all 0.2s ease;
 }
 
 .badge.views {
@@ -82,6 +83,13 @@
     text-align: center;
     font-size: 1.1rem;
     font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.number-selector input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    outline: none;
 }
 
 .nav-btn {
@@ -93,11 +101,13 @@
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.2rem;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-btn:hover:not(:disabled) {
     background: #6366f1;
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
+    transform: scale(1.08);
 }
 
 .nav-btn:disabled {
@@ -115,7 +125,7 @@
     border-radius: 12px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .random-btn {
@@ -127,6 +137,8 @@
 .random-btn:hover {
     background: #6366f1;
     color: white;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    transform: translateY(-1px);
 }
 
 .save-btn {
@@ -138,10 +150,17 @@
     gap: 0.5rem;
 }
 
+.save-btn:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
+}
+
 .save-btn.saved {
     background: rgba(234, 179, 8, 0.2);
     border-color: #eab308;
     color: #eab308;
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.15);
 }
 
 /* Comparison Grid */
@@ -157,6 +176,10 @@
     display: flex;
     flex-direction: column;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-card:hover {
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .text-card.hidden {
@@ -216,12 +239,13 @@
     cursor: pointer;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .show-btn:hover {
     background: rgba(99, 102, 241, 0.2);
     transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
 
 /* Rating Bar */
@@ -244,7 +268,7 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .rate-btn.easy { background: #22c55e; }
@@ -254,6 +278,16 @@
 .rate-btn:hover {
     transform: translateY(-2px);
     filter: brightness(1.1);
+}
+
+.rate-btn.easy:hover {
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+}
+.rate-btn.medium:hover {
+    box-shadow: 0 6px 20px rgba(234, 179, 8, 0.35);
+}
+.rate-btn.hard:hover {
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
 }
 
 /* ── Tablet ── */
@@ -325,5 +359,31 @@
     .show-btn {
         padding: 1rem 1.5rem;
         font-size: 1rem;
+    }
+}
+
+/* ── Ultra-narrow (375px) ── */
+@media (max-width: 375px) {
+    .training-container {
+        padding: 0 0.5rem;
+    }
+    .stats-bar {
+        padding: 0.5rem 0.75rem;
+        gap: 0.35rem;
+    }
+    .badge {
+        font-size: 0.72rem;
+        padding: 0.2rem 0.6rem;
+    }
+    .text-card {
+        padding: 1rem;
+    }
+    .text-content {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .rate-btn {
+        padding: 0.6rem 0.35rem;
+        font-size: 0.85rem;
     }
 }
