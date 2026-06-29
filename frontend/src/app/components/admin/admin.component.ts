@@ -115,6 +115,24 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  runDbSetup(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    this.authService.setupDatabase().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.successMessage = res.message || 'Datenbank erfolgreich eingerichtet!';
+        this.loadAccounts();
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = err.error?.details || err.error?.error || 'Datenbank-Setup fehlgeschlagen. Bitte prüfe die Logs.';
+      }
+    });
+  }
+
   deleteAccount(account: Account): void {
     if (account.guid === 'default-account-guid') {
       alert('Der Standard-Account kann nicht gelöscht werden.');

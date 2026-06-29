@@ -619,6 +619,19 @@ app.post('/api/admin/auth', (req, res) => {
     return res.status(401).json({ success: false, error: 'Ungültiges Admin-Passwort' });
 });
 
+// Manual database setup and migration trigger
+app.post('/api/admin/db-setup', adminAuthMiddleware, asyncHandler(async (req, res) => {
+    try {
+        console.log('Manual database setup triggered...');
+        await runMigrationsAndSeed(1, 0); 
+        await initializeMultiTenant();
+        res.json({ success: true, message: 'Datenbank erfolgreich eingerichtet und Fragen importiert!' });
+    } catch (err) {
+        console.error('Manual database setup failed:', err);
+        res.status(500).json({ error: 'Datenbank-Setup fehlgeschlagen', details: err.message });
+    }
+}));
+
 // Get all accounts
 app.get('/api/admin/accounts', adminAuthMiddleware, asyncHandler(async (req, res) => {
     const accounts = await prisma.account.findMany({
@@ -674,7 +687,7 @@ async function runMigrationsAndSeed(retries = 15, delay = 5000) {
         try {
             console.log(`Running database migrations (attempt ${i + 1}/${retries})...`);
             await new Promise((resolve, reject) => {
-                exec('npx prisma db push', (error, stdout, stderr) => {
+                exec('npx --no-install prisma db push', (error, stdout, stderr) => {
                     if (error) {
                         reject(new Error(stderr || error.message));
                     } else {

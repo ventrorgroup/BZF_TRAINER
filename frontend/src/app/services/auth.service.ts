@@ -141,6 +141,10 @@ export class AuthService {
     );
   }
 
+  setupDatabase(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/admin/db-setup`, {});
+  }
+
   logoutAdmin(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem(this.adminStorageKey);
