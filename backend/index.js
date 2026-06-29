@@ -667,6 +667,46 @@ app.use((err, req, res, next) => {
         details: err.message 
     });
 });
+// Function to run migrations and seeding with retries
+async function runMigrationsAndSeed(retries = 15, delay = 5000) {
+    const { exec } = require('child_process');
+    for (let i = 0; i < retries; i++) {
+        try {
+            console.log(`Running database migrations (attempt ${i + 1}/${retries})...`);
+            await new Promise((resolve, reject) => {
+                exec('npx prisma db push', (error, stdout, stderr) => {
+                    if (error) {
+                        reject(new Error(stderr || error.message));
+                    } else {
+                        resolve(stdout);
+                    }
+                });
+            });
+            console.log('Database migrations completed successfully.');
+            
+            // Seed database questions
+            console.log('Running database seeding...');
+            await new Promise((resolve, reject) => {
+                exec('node seed.js', (error, stdout, stderr) => {
+                    if (error) {
+                        reject(new Error(stderr || error.message));
+                    } else {
+                        resolve(stdout);
+                    }
+                });
+            });
+            console.log('Database seeding completed successfully.');
+            return;
+        } catch (err) {
+            console.error(`Migration/Seed attempt ${i + 1} failed:`, err.message);
+            if (i < retries - 1) {
+                console.log(`Retrying in ${delay / 1000}s...`);
+                await new Promise(r => setTimeout(r, delay));
+            }
+        }
+    }
+    throw new Error('All migration/seeding attempts failed.');
+}
 
 const PORT = process.env.PORT || 3000;
 
@@ -674,8 +714,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     
-    // Perform database initialization in the background
-    initializeMultiTenant().catch(err => {
-        console.error('Failed to initialize multi-tenant database:', err);
+    // Run database migrations and seeding in the background, then align multi-tenant
+    runMigrationsAndSeed().then(() => {
+        return initializeMultiTenant();
+    }).catch(err => {
+        console.error('Database migration/initialization failed:', err);
     });
 });
