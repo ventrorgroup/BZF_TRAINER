@@ -59,25 +59,45 @@
       <div class="glass-card quick-access">
         <h3>Lern-Modi</h3>
         <div class="mode-grid">
-          <div class="mode-card glass-card" routerLink="/learn">
-            <div class="mode-icon">🎲</div>
+          <div class="mode-card mode-random" routerLink="/learn">
+            <div class="mode-card-glow"></div>
+            <div class="mode-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mode-svg"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M12 8h.01"/><path d="M8 12h.01"/><path d="M16 12h.01"/><path d="M12 16h.01"/><path d="M8 8h.01"/><path d="M16 16h.01"/></svg>
+            </div>
             <div class="mode-info">
               <h4>Zufalls-Lernen</h4>
               <p>Fragen im Mix trainieren</p>
             </div>
+            <div class="mode-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
           </div>
-          <div class="mode-card glass-card" routerLink="/learn/sequential/1">
-            <div class="mode-icon">📖</div>
+
+          <div class="mode-card mode-sequential" routerLink="/learn/sequential/1">
+            <div class="mode-card-glow"></div>
+            <div class="mode-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mode-svg"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/><path d="M6 14h10"/></svg>
+            </div>
             <div class="mode-info">
               <h4>Fragen-Katalog</h4>
               <p>Alle 261 Fragen nacheinander</p>
             </div>
+            <div class="mode-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
           </div>
-          <div class="mode-card glass-card english-highlight" routerLink="/english">
-            <div class="mode-icon">🇬🇧</div>
+
+          <div class="mode-card mode-english" routerLink="/english">
+            <div class="mode-card-glow"></div>
+            <div class="mode-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mode-svg"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+            </div>
             <div class="mode-info">
               <h4>Englisch-Training</h4>
               <p>Texte übersetzen & bewerten</p>
+            </div>
+            <div class="mode-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </div>
           </div>
         </div>
