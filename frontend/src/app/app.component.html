@@ -32,6 +32,8 @@
       <router-outlet></router-outlet>
     </main>
   </div>
+} @else if (isAdminRoute()) {
+  <router-outlet></router-outlet>
 } @else {
   <app-login></app-login>
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
 
@@ -14,7 +14,11 @@ export class AppComponent {
   title = 'BZF Trainer';
   navOpen = false;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private router: Router) {}
+
+  isAdminRoute(): boolean {
+    return this.router.url === '/admin' || this.router.url.startsWith('/admin?');
+  }
 
   switchAccount(): void {
     const current = this.authService.currentAccount();
