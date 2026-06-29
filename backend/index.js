@@ -143,13 +143,29 @@ const accountMiddleware = asyncHandler(async (req, res, next) => {
 });
 
 // Public Login Endpoint
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', asyncHandler(async (req, res) => {
     const { password } = req.body;
+    if (!password) {
+        return res.status(400).json({ success: false, error: 'Passwort ist erforderlich' });
+    }
     if (password === APP_PASSWORD) {
         return res.json({ success: true, token: APP_PASSWORD });
     }
-    return res.status(401).json({ success: false, error: 'Ungültiges Passwort' });
-});
+
+    // Check if it's a valid account GUID
+    const account = await prisma.account.findUnique({
+        where: { guid: password }
+    });
+    if (account) {
+        return res.json({ 
+            success: true, 
+            token: APP_PASSWORD, 
+            accountGuid: account.guid 
+        });
+    }
+
+    return res.status(401).json({ success: false, error: 'Ungültiges Passwort oder GUID' });
+}));
 
 // Protect all /api/ paths except login and admin auth
 app.use((req, res, next) => {

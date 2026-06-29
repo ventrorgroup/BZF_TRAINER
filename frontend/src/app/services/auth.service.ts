@@ -110,6 +110,9 @@ export class AuthService {
         if (res && res.success && res.token) {
           if (typeof window !== 'undefined' && window.localStorage) {
             localStorage.setItem(this.storageKey, res.token);
+            if (res.accountGuid) {
+              localStorage.setItem('bzf_account_guid', res.accountGuid);
+            }
           }
           this.isLoggedIn.set(true);
           this.loadCurrentAccount();
