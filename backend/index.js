@@ -683,6 +683,7 @@ app.use((err, req, res, next) => {
 // Function to run migrations and seeding with retries
 async function runMigrationsAndSeed(retries = 15, delay = 5000) {
     const { exec } = require('child_process');
+    let lastError = null;
     for (let i = 0; i < retries; i++) {
         try {
             console.log(`Running database migrations (attempt ${i + 1}/${retries})...`);
@@ -712,13 +713,14 @@ async function runMigrationsAndSeed(retries = 15, delay = 5000) {
             return;
         } catch (err) {
             console.error(`Migration/Seed attempt ${i + 1} failed:`, err.message);
+            lastError = err;
             if (i < retries - 1) {
                 console.log(`Retrying in ${delay / 1000}s...`);
                 await new Promise(r => setTimeout(r, delay));
             }
         }
     }
-    throw new Error('All migration/seeding attempts failed.');
+    throw new Error('All migration/seeding attempts failed. Details: ' + (lastError ? lastError.message : 'Unknown error'));
 }
 
 const PORT = process.env.PORT || 3000;
