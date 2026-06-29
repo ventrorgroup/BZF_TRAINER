@@ -111,9 +111,18 @@
     <div class="danger-zone glass-card">
       <div class="danger-info">
         <h4>Daten-Management</h4>
-        <p>Setze alle Lernfortschritte und Statistiken zurück, um von vorn zu beginnen.</p>
+        <p>Sichere deinen Fortschritt als Backup oder übertrage ihn auf ein anderes Konto.</p>
       </div>
-      <button class="btn-reset" (click)="resetProgress()">Alles Zurücksetzen</button>
+      <div class="data-actions">
+        <button class="btn-secondary" (click)="exportProgress()" style="padding: 0.75rem 1.25rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+          📥 Exportieren (.json)
+        </button>
+        <button class="btn-secondary" (click)="fileInput.click()" style="padding: 0.75rem 1.25rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+          📤 Importieren (.json)
+        </button>
+        <input #fileInput type="file" (change)="importProgress($event)" accept=".json" style="display: none;" />
+        <button class="btn-reset" (click)="resetProgress()">Alles Zurücksetzen</button>
+      </div>
     </div>
   </div>
 </div>

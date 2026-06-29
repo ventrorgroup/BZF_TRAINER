@@ -106,6 +106,14 @@ export class BzfService {
     return this.http.post(`${this.apiUrl}/stats/reset`, {});
   }
 
+  exportProgress(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile/export`);
+  }
+
+  importProgress(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/profile/import`, data);
+  }
+
   // BZF English Texts
   getRandomText(): Observable<any> {
     return this.http.get(`${this.apiUrl}/texts/random`);

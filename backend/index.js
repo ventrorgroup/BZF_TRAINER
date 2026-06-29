@@ -610,6 +610,123 @@ app.post('/api/stats/reset', asyncHandler(async (req, res) => {
     }
 }));
 
+// Export student progress
+app.get('/api/profile/export', asyncHandler(async (req, res) => {
+    const userStats = await prisma.userStat.findMany({
+        where: { accountId: req.accountId },
+        include: { question: { select: { qNumber: true } } }
+    });
+
+    const textStats = await prisma.textStat.findMany({
+        where: { accountId: req.accountId },
+        include: { bzfText: { select: { number: true } } }
+    });
+
+    const examResults = await prisma.examResult.findMany({
+        where: { accountId: req.accountId },
+        include: { exam: { select: { name: true } } }
+    });
+
+    const exportData = {
+        userStats: userStats.map(s => ({
+            qNumber: s.question.qNumber,
+            correct: s.correct,
+            incorrect: s.incorrect,
+            isDifficult: s.isDifficult
+        })),
+        textStats: textStats.map(s => ({
+            textNumber: s.bzfText.number,
+            difficulty: s.difficulty,
+            isFavorite: s.isFavorite,
+            viewCount: s.viewCount,
+            easyCount: s.easyCount,
+            mediumCount: s.mediumCount,
+            hardCount: s.hardCount
+        })),
+        examResults: examResults.map(r => ({
+            examName: r.exam.name,
+            score: r.score,
+            date: r.date
+        }))
+    };
+
+    res.json(exportData);
+}));
+
+// Import student progress
+app.post('/api/profile/import', asyncHandler(async (req, res) => {
+    const { userStats, textStats, examResults } = req.body;
+
+    if (!Array.isArray(userStats) || !Array.isArray(textStats) || !Array.isArray(examResults)) {
+        return res.status(400).json({ error: 'Ungültiges Export-Format.' });
+    }
+
+    await prisma.$transaction(async (tx) => {
+        // Wipe existing
+        await tx.userStat.deleteMany({ where: { accountId: req.accountId } });
+        await tx.textStat.deleteMany({ where: { accountId: req.accountId } });
+        await tx.examResult.deleteMany({ where: { accountId: req.accountId } });
+
+        // Import UserStats
+        for (const stat of userStats) {
+            const question = await tx.question.findUnique({
+                where: { qNumber: stat.qNumber }
+            });
+            if (question) {
+                await tx.userStat.create({
+                    data: {
+                        accountId: req.accountId,
+                        questionId: question.id,
+                        correct: stat.correct || 0,
+                        incorrect: stat.incorrect || 0,
+                        isDifficult: !!stat.isDifficult
+                    }
+                });
+            }
+        }
+
+        // Import TextStats
+        for (const stat of textStats) {
+            const bzfText = await tx.bzfText.findUnique({
+                where: { number: stat.textNumber }
+            });
+            if (bzfText) {
+                await tx.textStat.create({
+                    data: {
+                        accountId: req.accountId,
+                        textId: bzfText.id,
+                        difficulty: stat.difficulty || 'unknown',
+                        isFavorite: !!stat.isFavorite,
+                        viewCount: stat.viewCount || 0,
+                        easyCount: stat.easyCount || 0,
+                        mediumCount: stat.mediumCount || 0,
+                        hardCount: stat.hardCount || 0
+                    }
+                });
+            }
+        }
+
+        // Import ExamResults
+        for (const result of examResults) {
+            const exam = await tx.exam.findFirst({
+                where: { name: result.examName }
+            });
+            if (exam) {
+                await tx.examResult.create({
+                    data: {
+                        accountId: req.accountId,
+                        examId: exam.id,
+                        score: result.score || 0,
+                        date: result.date ? new Date(result.date) : new Date()
+                    }
+                });
+            }
+        }
+    });
+
+    res.json({ success: true, message: 'Fortschritt erfolgreich importiert!' });
+}));
+
 // --- BZF Sprechfunk Simulationen ---
 app.get('/api/sprechfunk', (req, res) => {
     try {
